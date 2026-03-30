@@ -1,0 +1,743 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>台灣 K12 科技×跨域競賽資料庫</title>
+  <meta name="description" content="適合國中七至九年級、高中生參加的科技、AI、數學、語文、藝術跨領域競賽整理，符合 108 課綱素養導向精神。" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
+  <style>
+    /* ── RESET & BASE ── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg:        #07101e;
+      --bg-card:   #0d1829;
+      --bg-deep:   #060d17;
+      --border:    #1a2840;
+      --border-hi: #1e3a5f;
+      --text-1:    #e2eaf4;
+      --text-2:    #7a9bb8;
+      --text-3:    #3a566e;
+      --accent:    #3b82f6;
+      --gold:      #f59e0b;
+      --green:     #10b981;
+      --red:       #ef4444;
+      --purple:    #8b5cf6;
+
+      --d-ai:      #f59e0b;
+      --d-math:    #3b82f6;
+      --d-lang:    #ec4899;
+      --d-art:     #a855f7;
+      --d-sci:     #10b981;
+      --d-stem:    #06b6d4;
+      --d-cross:   #f97316;
+      --d-social:  #84cc16;
+      --d-edu:     #8b5cf6;
+      --d-tech:    #64748b;
+
+      --font-body: 'Noto Sans TC', sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+      --radius:    10px;
+      --radius-lg: 14px;
+    }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: var(--font-body);
+      background: var(--bg);
+      color: var(--text-1);
+      min-height: 100vh;
+      line-height: 1.6;
+    }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    button { font-family: var(--font-body); cursor: pointer; }
+
+    /* ── HERO ── */
+    .hero {
+      background: linear-gradient(180deg, #0d1f38 0%, var(--bg) 100%);
+      border-bottom: 1px solid var(--border);
+      padding: 48px 24px 36px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 80% 60% at 50% -10%, #1e3a5f30, transparent);
+      pointer-events: none;
+    }
+    .hero-eyebrow {
+      font-size: 11px;
+      letter-spacing: .22em;
+      color: var(--accent);
+      font-weight: 700;
+      text-transform: uppercase;
+      margin-bottom: 14px;
+    }
+    .hero h1 {
+      font-size: clamp(22px, 5vw, 36px);
+      font-weight: 900;
+      line-height: 1.2;
+      background: linear-gradient(130deg, var(--text-1) 40%, #93c5fd);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 12px;
+    }
+    .hero-sub {
+      font-size: 13px;
+      color: var(--text-3);
+      display: flex;
+      justify-content: center;
+      gap: 18px;
+      flex-wrap: wrap;
+    }
+    .hero-sub span { display: flex; align-items: center; gap: 5px; }
+    .hero-sub strong { color: var(--accent); }
+
+    /* ── LAYOUT ── */
+    .container { max-width: 920px; margin: 0 auto; padding: 0 20px; }
+
+    /* ── DOMAIN LEGEND ── */
+    .legend-section {
+      padding: 20px 0 0;
+    }
+    .legend-label {
+      font-size: 11px;
+      color: var(--text-3);
+      font-weight: 700;
+      letter-spacing: .08em;
+      margin-bottom: 10px;
+    }
+    .legend-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+    .domain-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 4px 11px;
+      border-radius: 99px;
+      font-size: 11px;
+      font-weight: 600;
+      border: 1px solid transparent;
+      background: transparent;
+      color: var(--text-3);
+      transition: all .15s;
+    }
+    .domain-chip:hover { opacity: .85; }
+    .domain-chip.active { font-weight: 700; }
+    .domain-chip .count { opacity: .5; font-size: 10px; }
+
+    /* ── FILTERS ── */
+    .filters-section { padding: 20px 0 0; }
+    .search-box {
+      width: 100%;
+      padding: 11px 16px;
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      background: var(--bg-deep);
+      color: var(--text-1);
+      font-family: var(--font-body);
+      font-size: 13px;
+      outline: none;
+      margin-bottom: 14px;
+      transition: border-color .2s;
+    }
+    .search-box:focus { border-color: var(--accent); }
+    .search-box::placeholder { color: var(--text-3); }
+    .filter-row {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      flex-wrap: wrap;
+      margin-bottom: 8px;
+    }
+    .filter-label {
+      font-size: 11px;
+      color: var(--text-3);
+      font-weight: 700;
+      min-width: 38px;
+    }
+    .filter-btn {
+      padding: 5px 13px;
+      border-radius: 8px;
+      font-size: 12px;
+      font-weight: 600;
+      border: 1px solid var(--border);
+      background: var(--bg-deep);
+      color: var(--text-3);
+      transition: all .15s;
+    }
+    .filter-btn.active {
+      border-color: var(--accent);
+      background: #1e3a5f;
+      color: #93c5fd;
+    }
+    .result-count {
+      font-size: 12px;
+      color: var(--text-3);
+      margin: 14px 0 6px;
+    }
+    .result-count strong { color: var(--accent); }
+
+    /* ── SECTION HEADER ── */
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin: 24px 0 12px;
+    }
+    .section-title {
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: .04em;
+      white-space: nowrap;
+    }
+    .section-line { flex: 1; height: 1px; background: var(--border); }
+    .section-count { font-size: 11px; color: var(--text-3); white-space: nowrap; }
+
+    /* ── CARD ── */
+    .card-list { display: flex; flex-direction: column; gap: 10px; margin-bottom: 6px; }
+    .card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 18px 20px;
+      cursor: pointer;
+      transition: transform .18s, box-shadow .18s, border-color .18s;
+      position: relative;
+      overflow: hidden;
+    }
+    .card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 40px #00000055;
+    }
+    .card.highlight {
+      background: linear-gradient(135deg, #0f1e30, #0a1520);
+    }
+    .card-ribbon {
+      position: absolute;
+      top: 0; right: 0;
+      font-size: 10px;
+      font-weight: 800;
+      padding: 3px 12px;
+      border-radius: 0 14px 0 8px;
+      letter-spacing: .05em;
+      color: #000;
+    }
+    .card-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 12px;
+    }
+    .card-meta { flex: 1; min-width: 0; }
+    .card-badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 5px;
+      margin-bottom: 8px;
+    }
+    .badge {
+      font-size: 11px;
+      font-weight: 700;
+      padding: 2px 9px;
+      border-radius: 6px;
+      border: 1px solid transparent;
+    }
+    .card-title {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--text-1);
+      line-height: 1.4;
+      margin-bottom: 3px;
+    }
+    .card-org {
+      font-size: 11px;
+      color: var(--text-3);
+    }
+    .card-chevron {
+      color: var(--text-3);
+      font-size: 16px;
+      flex-shrink: 0;
+      transition: transform .2s;
+      margin-top: 2px;
+      user-select: none;
+    }
+    .card-chevron.open { transform: rotate(180deg); }
+    .card-domains {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 4px;
+      margin-top: 10px;
+    }
+    .domain-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 3px;
+      padding: 2px 8px;
+      border-radius: 99px;
+      font-size: 11px;
+      font-weight: 600;
+      border: 1px solid transparent;
+    }
+
+    /* ── CARD BODY (expanded) ── */
+    .card-body {
+      display: none;
+      margin-top: 16px;
+      padding-top: 16px;
+      border-top: 1px solid var(--border);
+    }
+    .card-body.open { display: block; }
+    .card-desc {
+      font-size: 13px;
+      color: var(--text-2);
+      line-height: 1.8;
+      margin-bottom: 14px;
+    }
+    .card-info-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-bottom: 14px;
+    }
+    @media (max-width: 480px) { .card-info-grid { grid-template-columns: 1fr; } }
+    .info-box {
+      background: var(--bg-deep);
+      border-radius: 8px;
+      padding: 10px 13px;
+    }
+    .info-box-label {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: .08em;
+      margin-bottom: 4px;
+    }
+    .info-box-value {
+      font-size: 12px;
+      line-height: 1.6;
+    }
+    .card-actions {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .btn-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
+      font-weight: 600;
+      color: #60a5fa;
+      padding: 7px 14px;
+      background: #1e3a5f;
+      border-radius: 8px;
+      border: 1px solid #2563eb40;
+      transition: background .15s;
+      text-decoration: none;
+    }
+    .btn-link:hover { background: #1e3a6f; text-decoration: none; }
+    .card-updated {
+      font-size: 10px;
+      color: var(--text-3);
+      font-family: var(--font-mono);
+    }
+
+    /* ── STATUS BADGE ── */
+    .status-open    { background: #10b98120; color: #34d399; border-color: #10b98140; }
+    .status-soon    { background: #f59e0b18; color: #fbbf24; border-color: #f59e0b40; }
+    .status-closed  { background: #ef444418; color: #f87171; border-color: #ef444440; }
+    .status-unknown { background: #64748b18; color: #94a3b8; border-color: #64748b40; }
+
+    /* ── SCOPE COLORS ── */
+    .scope-domestic { color: #60a5fa; background: #1e3a5f20; border-color: #3b82f640; }
+    .scope-link     { color: #c4b5fd; background: #4c1d9520; border-color: #7c3aed40; }
+    .scope-intl     { color: #fbbf24; background: #78350f20; border-color: #f59e0b40; }
+
+    /* ── EMPTY ── */
+    .empty {
+      text-align: center;
+      padding: 60px 0;
+      color: var(--text-3);
+    }
+    .empty .emoji { font-size: 44px; margin-bottom: 14px; }
+
+    /* ── FOOTER NOTE ── */
+    .footer-note {
+      margin: 36px 0 48px;
+      padding: 18px 20px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      font-size: 12px;
+      color: var(--text-3);
+      line-height: 1.85;
+    }
+    .footer-note strong { color: var(--text-2); }
+    .footer-note code {
+      background: var(--border);
+      padding: 1px 6px;
+      border-radius: 4px;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: #93c5fd;
+    }
+    .footer-note a { color: var(--accent); }
+
+    /* ── LOADING ── */
+    .loading {
+      text-align: center;
+      padding: 80px 0;
+      color: var(--text-3);
+      font-size: 14px;
+    }
+
+    /* ── SCROLL TOP ── */
+    #scrollTop {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      width: 40px; height: 40px;
+      border-radius: 50%;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      color: var(--text-2);
+      font-size: 16px;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all .2s;
+      z-index: 99;
+    }
+    #scrollTop:hover { border-color: var(--accent); color: var(--accent); }
+    #scrollTop.visible { display: flex; }
+
+    @media (max-width: 600px) {
+      .hero { padding: 36px 16px 28px; }
+      .container { padding: 0 14px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="hero-eyebrow">🏆 台灣 K12 競賽資料庫 ｜ 持續更新版</div>
+  <h1>科技 × AI × 數學 × 語文 × 藝術<br>跨領域競賽完整整理</h1>
+  <div class="hero-sub">
+    <span>適合 <strong>國中 7–9 年級 ＆ 高中</strong></span>
+    <span>符合 <strong>108 課綱</strong> 素養導向</span>
+    <span id="totalCount">共 <strong>—</strong> 項競賽</span>
+    <span>🗓 2026 年持續更新</span>
+  </div>
+</header>
+
+<!-- MAIN -->
+<main class="container">
+
+  <!-- DOMAIN LEGEND -->
+  <section class="legend-section">
+    <div class="legend-label">▸ 點擊領域快速篩選</div>
+    <div class="legend-row" id="domainLegend"></div>
+  </section>
+
+  <!-- FILTERS -->
+  <section class="filters-section">
+    <input class="search-box" id="searchBox" type="search"
+      placeholder="搜尋競賽名稱、說明、標籤…" autocomplete="off" />
+
+    <div class="filter-row">
+      <span class="filter-label">範圍：</span>
+      <button class="filter-btn active" data-filter="scope" data-value="全部">全部</button>
+      <button class="filter-btn" data-filter="scope" data-value="國內">國內</button>
+      <button class="filter-btn" data-filter="scope" data-value="國內（接軌國際）">接軌國際</button>
+      <button class="filter-btn" data-filter="scope" data-value="國際">國際</button>
+    </div>
+
+    <div class="filter-row">
+      <span class="filter-label">學段：</span>
+      <button class="filter-btn active" data-filter="level" data-value="全部">全部</button>
+      <button class="filter-btn" data-filter="level" data-value="國中">國中</button>
+      <button class="filter-btn" data-filter="level" data-value="高中">高中</button>
+    </div>
+
+    <div class="filter-row">
+      <span class="filter-label">狀態：</span>
+      <button class="filter-btn active" data-filter="status" data-value="全部">全部</button>
+      <button class="filter-btn" data-filter="status" data-value="報名中">報名中</button>
+      <button class="filter-btn" data-filter="status" data-value="開放中">開放中</button>
+      <button class="filter-btn" data-filter="status" data-value="即將開放">即將開放</button>
+      <button class="filter-btn" data-filter="status" data-value="已截止">已截止</button>
+    </div>
+
+    <div class="result-count" id="resultCount">載入中…</div>
+  </section>
+
+  <!-- COMPETITION LIST -->
+  <div id="listContainer">
+    <div class="loading">⏳ 載入競賽資料中…</div>
+  </div>
+
+  <!-- FOOTER NOTE -->
+  <div class="footer-note">
+    <strong>📌 使用說明</strong><br>
+    各競賽日程每年皆可能異動，請務必點擊「前往官方網站」確認最新資訊。<br>
+    本資料庫的資料來源為 <code>competitions.json</code>，更新競賽只需編輯該檔案，不需修改程式碼。<br>
+    ⚠️ <strong>IOAI 國際 AI 奧林匹亞</strong>台灣選拔體系仍在建立中，請關注教育部及台灣資訊學科奧林匹亞（TOI）公告。<br>
+    有新競賽資訊或修正建議？歡迎至
+    <a href="../../issues/new" target="_blank" id="repoLink">GitHub Issues</a> 回報。<br>
+    最後更新：2026 年 3 月
+  </div>
+</main>
+
+<!-- SCROLL TOP -->
+<button id="scrollTop" title="回到頂部">↑</button>
+
+<script>
+// ── CONFIG ──────────────────────────────────────────────────────────────────
+// 資料來源：competitions.json（透過 sync.py 同步至本檔案）
+
+const DOMAIN_META = {
+  'AI工具應用':  { icon: '🤖', color: '#f59e0b', var: '--d-ai' },
+  '數學':        { icon: '📐', color: '#3b82f6', var: '--d-math' },
+  '語文/文學':   { icon: '✍️', color: '#ec4899', var: '--d-lang' },
+  '視覺藝術':    { icon: '🎨', color: '#a855f7', var: '--d-art' },
+  '科學研究':    { icon: '🔬', color: '#10b981', var: '--d-sci' },
+  'STEM':        { icon: '⚙️', color: '#06b6d4', var: '--d-stem' },
+  '跨域創新':    { icon: '🌐', color: '#f97316', var: '--d-cross' },
+  '社會議題':    { icon: '🌱', color: '#84cc16', var: '--d-social' },
+  '教育科技':    { icon: '💡', color: '#8b5cf6', var: '--d-edu' },
+  '科技':        { icon: '🔧', color: '#64748b', var: '--d-tech' },
+};
+
+const SCOPE_CLASS = {
+  '國內':         'scope-domestic',
+  '國內（接軌國際）': 'scope-link',
+  '國際':         'scope-intl',
+};
+
+const STATUS_MAP = {
+  '報名中':   { cls: 'status-open',    label: '🟢 報名中' },
+  '開放中':   { cls: 'status-open',    label: '🟢 開放中' },
+  '即將開放': { cls: 'status-soon',    label: '🟡 即將開放' },
+  '已截止':   { cls: 'status-closed',  label: '🔴 已截止' },
+};
+
+// ── STATE ───────────────────────────────────────────────────────────────────
+let allData = [];
+let filters = { scope: '全部', level: '全部', status: '全部', domain: '全部', search: '' };
+
+// ── DATA (內嵌，從 competitions.json 同步) ──────────────────────────────────
+// ⚠️  請勿直接修改這裡的資料！
+// 更新方式：修改 competitions.json → 執行 python3 sync.py → commit & push
+// 詳見 README.md
+const EMBEDDED_DATA = [{"id":101,"name":"數感盃：AI 共創新詩圖文競賽","scope":"國內","domains":["數學","語文/文學","AI工具應用"],"level":["國中"],"organizer":"數感實驗室","description":"以數學為靈感創作詩作，並用 AI 圖像生成工具（Gemini API）共創圖像，評審同時評估數學思維、文采與視覺效果。國七組單獨開放報名，是少見的「數學×文學×AI」三合一競賽。","schedule":"2025 年 12 月起開放創作；複審 2026/2/24；頒獎於 2026 年 3 月","deadline":"2026/1/23（已截止，下屆請關注官方公告）","url":"https://ai-award.numeracylab.com/","tags":["數學","文學","AI生成","詩","圖像"],"highlight":true,"status":"已截止","updated":"2026-03"},{"id":102,"name":"全國高中職生成式 AI 創意競賽","scope":"國內","domains":["語文/文學","視覺藝術","AI工具應用"],"level":["高中"],"organizer":"中國科技大學資訊工程系","description":"A 類：以 ChatGPT / Copilot / Gemini 生成 500 字以內中文短文或新詩；B 類：以 Midjourney / DALL-E / Stable Diffusion 生成圖像。純線上投稿，門檻低，適合語文或美術能力強的學生入門 AI 工具應用。","schedule":"通常每年 2–3 月截止，115 學年度預計重新開放","deadline":"預計 2027 年 3 月（請關注官方公告）","url":"https://dcsie.gm.cute.edu.tw","tags":["生成式AI","語文","圖像創作","Prompt工程"],"highlight":false,"status":"即將開放","updated":"2026-03"},{"id":103,"name":"育秀盃創意獎（高中 AI 應用競賽）","scope":"國內","domains":["跨域創新","AI工具應用","社會議題"],"level":["高中"],"organizer":"育秀教育基金會 / 神通資科","description":"鼓勵高中職學生運用生成式 AI、機器學習或深度學習（含 MiAutoML）開發具社會價值的 AI 應用。指定主題包含 AI 輔助教學工具、個人化學習助手、ESG 解決方案，自訂主題亦可。","schedule":"截止日：2026 年 5 月 10 日（本屆）；頒獎典禮：2026 年 6 月","deadline":"2026/5/10","url":"https://award.ysed.org.tw/competition/80/1","tags":["生成式AI","機器學習","ESG","社會創新"],"highlight":false,"status":"報名中","updated":"2026-03"},{"id":104,"name":"全國科技教育創意實作競賽","scope":"國內","domains":["科技","設計思考","跨域創新"],"level":["國中","高中"],"organizer":"各縣市教育局 / 教育部","description":"依 108 課綱，分「生活科技組」（設計製作）與「資訊科技組」（程式＋運算思維）。近年各縣市主題逐漸融入 AI、永續設計（SDGs），強調設計思考歷程而非純技術。","schedule":"縣市賽：每年 3–5 月；全國賽：9–11 月","deadline":"各縣市公告，通常 2–3 月報名","url":"https://technology.chc.edu.tw/","tags":["設計思考","108課綱","資訊科技","生活科技"],"highlight":false,"status":"即將開放","updated":"2026-03"},{"id":105,"name":"全國中小學科學展覽會（全國科展）","scope":"國內","domains":["科學研究","STEM"],"level":["國中","高中"],"organizer":"國立臺灣科學教育館 / 教育部","description":"台灣最具代表性的科學研究競賽，近年 AI、資料科學、環境科學、社會科學均可報名。入選作品可代表台灣參加臺灣國際科展，接軌 Regeneron ISEF。","schedule":"縣市初賽：每年 2–4 月；全國決賽：7 月","deadline":"各縣市約 12–1 月報名","url":"https://twsf.ntsec.gov.tw","tags":["科學研究","STEM","ISEF資格賽","跨領域"],"highlight":true,"status":"報名中","updated":"2026-03"},{"id":106,"name":"臺灣國際科學展覽會（TISF）","scope":"國內（接軌國際）","domains":["科學研究","STEM"],"level":["國中","高中"],"organizer":"國立臺灣科學教育館","description":"台灣代表角逐 Regeneron ISEF 的選拔管道。AI、資訊科學、行為科學、生態學等跨領域均可報名。獲選代表可於每年 5 月赴美與全球 75 國頂尖學生競技。","schedule":"初審：每年 12 月；複審：隔年 2 月","deadline":"每年 10/20–10/31 報名","url":"https://twsf.ntsec.gov.tw","tags":["科學研究","國際接軌","Regeneron ISEF"],"highlight":true,"status":"即將開放","updated":"2026-03"},{"id":107,"name":"WMI 世界數學邀請賽（台灣選拔賽）","scope":"國內（接軌國際）","domains":["數學"],"level":["國中","高中"],"organizer":"中華數學協會","description":"個人制數學競賽，覆蓋國小至高三，獲金銀銅獎者取得參加 7 月世界總決賽的資格。雖非 AI 競賽，但強調邏輯推理與計算思維，是 AI 學習路徑的重要數學基礎能力認證。","schedule":"台灣選拔賽：每年 1 月；成績公布：2 月初；世界賽：7 月","deadline":"通常 11–12 月報名","url":"https://www.vipolpcs.com","tags":["數學","邏輯推理","國際接軌","個人賽"],"highlight":false,"status":"已截止","updated":"2026-03"},{"id":108,"name":"2026 START！AI 智慧小車全國競賽（第七屆）","scope":"國內","domains":["AI工具應用","科技"],"level":["國中","高中"],"organizer":"桃園市立平鎮高中","description":"分競賽組（程式控制小車任務）、創意組（主題：智慧物流，需企劃書+展示）、聯盟組（混齡）。創意組不限器材品牌，著重 AI 創意與設計說明，適合跨領域組隊。","schedule":"創意組收件截止：2026/3/2；決賽：2026 年上半年","deadline":"創意組：2026/3/2","url":"https://sites.google.com/a/go.pymhs.tyc.edu.tw/startlearning/","tags":["AI","機器人","智慧小車","程式設計"],"highlight":false,"status":"報名中","updated":"2026-03"},{"id":109,"name":"全國創意與智慧科技競賽 2026","scope":"國內","domains":["AI工具應用","科技","跨域創新"],"level":["高中"],"organizer":"國立臺北教育大學 / 台灣教育傳播暨科技學會","description":"設「人工智慧組」「機器人創作組」，鼓勵高中生從發想、設計到作品實現完整歷程。今年與「ICEET 數位學習與教育科技國際研討會」共同舉辦，具備國際交流機會。","schedule":"報名截止：2026/4/3；頒獎：2026/5/20（臺北教育大學）","deadline":"2026/4/3","url":"https://www.cacet.org/web/2026creation/index.html","tags":["AI","機器人","創意設計","教育科技"],"highlight":false,"status":"報名中","updated":"2026-03"},{"id":201,"name":"IOAI 國際人工智慧奧林匹亞","scope":"國際","domains":["AI工具應用","數學","科學研究"],"level":["高中"],"organizer":"IOAI 國際組委會（UNESCO 認可）","description":"全球最高規格 AI 學科競賽，由各國國家隊選拔，高中生參加個人賽（機器學習、NLP、演算法）。2026 年第三屆於哈薩克阿斯塔納舉行（8/2–8/8）。台灣尚待建立正式選拔體系，近鄰香港、中國均已有成熟選拔制度可參考。","schedule":"IOAI 2026：2026/8/2–8/8，哈薩克阿斯塔納","deadline":"各國選拔期程不同，請持續關注教育部及台灣資訊學科奧林匹亞（TOI）相關公告","url":"https://ioai-official.org/","tags":["AI","機器學習","NLP","演算法","國際奧林匹亞"],"highlight":true,"status":"即將開放","updated":"2026-03"},{"id":202,"name":"WAICY 世界青少年人工智慧競賽","scope":"國際","domains":["AI工具應用","視覺藝術","跨域創新"],"level":["國中","高中"],"organizer":"WAICY（美國非營利組織）","description":"6–18 歲皆可參加的全球 AI 競賽，設三大 Track：① AI 應用問題解決、② AI 生成藝術（AI-Generated Art）、③ AI 大語言模型 Prompt Engineering。可線上提交，無需到場，適合各種背景學生。","schedule":"2026 年開放報名（持續關注官網）","deadline":"請關注 waicy.org 官方公告","url":"https://www.waicy.org/","tags":["AI","AI藝術","Prompt工程","6-18歲","線上參賽"],"highlight":true,"status":"即將開放","updated":"2026-03"},{"id":203,"name":"USAII Global AI Hackathon 2026","scope":"國際","domains":["AI工具應用","跨域創新","社會議題"],"level":["高中"],"organizer":"美國人工智慧研究院（USAII）","description":"全球線上 AI Hackathon，預計 2026 年 6 月舉辦，高中生（9–12 年級）均可參加。團隊（1–5 人）設計 AI 解決方案，強調負責任 AI（Responsible AI），不需深度技術背景即可參加。","schedule":"2026 年 6 月（詳細日程持續公告）","deadline":"預計 2026 年 5 月開放報名","url":"https://aihackathon.usaii.org/","tags":["AI","Hackathon","社會影響力","線上參賽","負責任AI"],"highlight":false,"status":"即將開放","updated":"2026-03"},{"id":204,"name":"ISTE AI Innovator Challenge 2026","scope":"國際","domains":["AI工具應用","跨域創新","教育科技"],"level":["國中","高中"],"organizer":"ISTE + ASCD（國際教育科技學會）","description":"K-12 學生運用 AI 素養解決社區問題，設計 AI 創新方案。完成 15 個 Studio 學習模組後提交專案，前三名將於 ISTELive 26（2026 年 6 月）全球舞台發表。適合對 AI 倫理與社會應用感興趣的學生。","schedule":"提交截止：2026/3/13；得獎宣布：2026 年 4 月；ISTELive 發表：6 月","deadline":"2026/3/13（本屆已截止，下屆注意官網）","url":"https://iste-ascd.org/ai-innovator","tags":["AI倫理","社會應用","教育科技","K-12","線上參賽"],"highlight":false,"status":"已截止","updated":"2026-03"},{"id":205,"name":"Wix Creators of Tomorrow Challenge 2026","scope":"國際","domains":["視覺藝術","語文/文學","社會議題","科技"],"level":["國中","高中"],"organizer":"Wix.com","description":"以 Wix 平台建立網站，主題緊扣 17 項聯合國 SDGs，評審重點為永續概念、設計質感與論述清晰度。入圍者可獲 Wix 專家一對一 5 週輔導，最終前三名在全球舞台展示。完全免費，適合具設計感或文字能力的學生。","schedule":"提交截止：2026/3/8；準決賽輔導：3–4 月；決賽：2026 年上半年","deadline":"2026/3/8（本屆已截止，下屆注意 wix.com/tomorrow）","url":"https://www.wix.com/tomorrow","tags":["網頁設計","SDGs","永續","視覺設計","語文表達"],"highlight":true,"status":"已截止","updated":"2026-03"},{"id":206,"name":"QS AI for ImpACT Challenge","scope":"國際","domains":["跨域創新","AI工具應用","社會議題"],"level":["高中"],"organizer":"QS ImpACT（英國 QS 集團）","description":"聚焦 AI 如何解決聯合國 SDGs 議題，學生提出方案或原型，強調社會影響力與負責任 AI 倫理。提供獎學金、全球展示機會，適合有跨領域思維的高中生。","schedule":"每年滾動開放，請關注 qsimpact.org","deadline":"請關注官方網站","url":"https://qsimpact.org/ai-for-impact-challenge/","tags":["AI倫理","SDGs","社會影響力","獎學金","跨領域"],"highlight":false,"status":"開放中","updated":"2026-03"},{"id":207,"name":"Regeneron ISEF 2026","scope":"國際","domains":["科學研究","STEM"],"level":["高中"],"organizer":"Society for Science（美國）","description":"全球最大高中 STEM 研究競賽，2026 年 5 月 9–15 日於美國鳳凰城舉行。台灣學生須先通過 TISF（臺灣國際科展）取得代表資格。AI、行為科學、社會學等均可報名，獎金逾 900 萬美元。","schedule":"2026/5/9–15，美國鳳凰城","deadline":"台灣選拔：每年 10 月報名 TISF","url":"https://www.societyforscience.org/isef/","tags":["STEM","科學研究","獎學金","國際","高中"],"highlight":true,"status":"報名中","updated":"2026-03"},{"id":208,"name":"Google Science Fair","scope":"國際","domains":["科學研究","跨域創新","社會議題"],"level":["國中","高中"],"organizer":"Google","description":"Google 舉辦的線上全球科學競賽（13–18 歲），鼓勵學生針對社會問題提出科學解決方案，近年含 AI 應用與資料科學主題。","schedule":"通常每年上半年開放（請關注官方公告）","deadline":"請關注 sciencefair.withgoogle.com","url":"https://sciencefair.withgoogle.com/","tags":["科學研究","社會議題","Google","13-18歲"],"highlight":false,"status":"即將開放","updated":"2026-03"},{"id":209,"name":"WRO 世界機器人奧林匹亞","scope":"國際","domains":["科技","跨域創新"],"level":["國中","高中"],"organizer":"WRO Association / 中華民國電腦技能基金會（台灣）","description":"全球 85 國以上，設常規賽、開放創意賽（含 AI 主題）、RoboMission 等組別。台灣每年辦理選拔，優秀隊伍前往世界總決賽（每年 11 月）。","schedule":"台灣選拔賽：6–8 月；世界賽：11 月","deadline":"台灣選拔約 4–5 月報名","url":"https://wro-association.org/","tags":["機器人","程式設計","STEM","國際"],"highlight":false,"status":"即將開放","updated":"2026-03"},{"id":210,"name":"FIRST LEGO League（FLL）","scope":"國際","domains":["科技","跨域創新","社會議題"],"level":["國中"],"organizer":"FIRST / LEGO Education","description":"9–16 歲參加，以 LEGO Spike Prime 機器人作任務，同時針對年度主題（如 AI、永續、健康等）提出社會研究與解決方案，兼顧技術與核心價值評審。","schedule":"賽季：每年 9 月至隔年 2 月；台灣賽：12 月–1 月","deadline":"通常 9–10 月報名","url":"https://www.firstlegoleague.org/","tags":["LEGO","機器人","社會研究","國中","核心價值"],"highlight":false,"status":"即將開放","updated":"2026-03"}];
+
+function loadData() {
+  allData = EMBEDDED_DATA;
+  init();
+}
+
+// ── INIT ─────────────────────────────────────────────────────────────────────
+function init() {
+  document.getElementById('totalCount').innerHTML =
+    `共 <strong>${allData.length}</strong> 項競賽`;
+  buildDomainLegend();
+  bindFilters();
+  render();
+}
+
+// ── DOMAIN LEGEND ─────────────────────────────────────────────────────────────
+function buildDomainLegend() {
+  const counts = {};
+  allData.forEach(c => c.domains.forEach(d => { counts[d] = (counts[d] || 0) + 1; }));
+  const sorted = Object.entries(counts).sort((a,b) => b[1]-a[1]);
+  const container = document.getElementById('domainLegend');
+  container.innerHTML = sorted.map(([d, n]) => {
+    const meta = DOMAIN_META[d] || { icon:'', color:'#64748b' };
+    return `<button class="domain-chip" data-domain="${d}"
+      style="border-color:${meta.color}44;color:#64748b;"
+      onclick="toggleDomain('${d}')">
+      ${meta.icon} ${d} <span class="count">(${n})</span>
+    </button>`;
+  }).join('');
+}
+
+function toggleDomain(d) {
+  filters.domain = filters.domain === d ? '全部' : d;
+  // update chip styles
+  document.querySelectorAll('.domain-chip').forEach(el => {
+    const dd = el.dataset.domain;
+    const meta = DOMAIN_META[dd] || { icon:'', color:'#64748b' };
+    const active = filters.domain === dd;
+    el.classList.toggle('active', active);
+    el.style.borderColor = active ? meta.color : `${meta.color}44`;
+    el.style.color       = active ? meta.color : '#64748b';
+    el.style.background  = active ? `${meta.color}18` : 'transparent';
+  });
+  render();
+}
+
+// ── FILTER BINDINGS ──────────────────────────────────────────────────────────
+function bindFilters() {
+  // filter buttons
+  document.querySelectorAll('[data-filter]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const key = btn.dataset.filter;
+      const val = btn.dataset.value;
+      filters[key] = val;
+      document.querySelectorAll(`[data-filter="${key}"]`).forEach(b => {
+        b.classList.toggle('active', b.dataset.value === val);
+      });
+      render();
+    });
+  });
+  // search
+  document.getElementById('searchBox').addEventListener('input', e => {
+    filters.search = e.target.value.trim().toLowerCase();
+    render();
+  });
+}
+
+// ── FILTER LOGIC ─────────────────────────────────────────────────────────────
+function getFiltered() {
+  return allData.filter(c => {
+    if (filters.scope  !== '全部' && c.scope !== filters.scope) return false;
+    if (filters.level  !== '全部' && !c.level.some(l => l.includes(filters.level))) return false;
+    if (filters.status !== '全部' && c.status !== filters.status) return false;
+    if (filters.domain !== '全部' && !c.domains.includes(filters.domain)) return false;
+    if (filters.search) {
+      const hay = [c.name, c.description, c.organizer, ...(c.tags||[]), ...(c.domains||[])].join(' ').toLowerCase();
+      if (!hay.includes(filters.search)) return false;
+    }
+    return true;
+  });
+}
+
+// ── RENDER ───────────────────────────────────────────────────────────────────
+function render() {
+  const filtered = getFiltered();
+  const domestic = filtered.filter(c => c.scope !== '國際');
+  const intl     = filtered.filter(c => c.scope === '國際');
+
+  // result count
+  let countMsg = `共找到 <strong>${filtered.length}</strong> 項競賽`;
+  if (filters.domain !== '全部') {
+    const meta = DOMAIN_META[filters.domain] || { icon:'', color:'#f59e0b' };
+    countMsg += `　<span style="color:${meta.color}">${meta.icon} 篩選：${filters.domain}</span>`;
+  }
+  document.getElementById('resultCount').innerHTML = countMsg;
+
+  if (filtered.length === 0) {
+    document.getElementById('listContainer').innerHTML =
+      `<div class="empty"><div class="emoji">🔍</div>沒有符合條件的競賽，請調整篩選條件</div>`;
+    return;
+  }
+
+  let html = '';
+  if (domestic.length) {
+    html += sectionHeader('🇹🇼 國內競賽', '#60a5fa', domestic.length);
+    html += `<div class="card-list">${domestic.map(cardHTML).join('')}</div>`;
+  }
+  if (intl.length) {
+    html += sectionHeader('🌍 國際競賽', '#fbbf24', intl.length);
+    html += `<div class="card-list">${intl.map(cardHTML).join('')}</div>`;
+  }
+  document.getElementById('listContainer').innerHTML = html;
+
+  // bind expand/collapse
+  document.querySelectorAll('.card').forEach(card => {
+    card.addEventListener('click', e => {
+      if (e.target.closest('a')) return; // don't collapse when clicking link
+      const body    = card.querySelector('.card-body');
+      const chevron = card.querySelector('.card-chevron');
+      const isOpen  = body.classList.contains('open');
+      body.classList.toggle('open', !isOpen);
+      chevron.classList.toggle('open', !isOpen);
+    });
+  });
+}
+
+function sectionHeader(label, color, count) {
+  return `<div class="section-header">
+    <span class="section-title" style="color:${color}">${label}</span>
+    <div class="section-line"></div>
+    <span class="section-count">${count} 項</span>
+  </div>`;
+}
+
+function cardHTML(c) {
+  const scopeCls  = SCOPE_CLASS[c.scope] || '';
+  const statusObj = STATUS_MAP[c.status] || { cls:'status-unknown', label: c.status || '—' };
+
+  const ribbonColor = c.scope === '國際' ? '#f59e0b' : '#3b82f6';
+  const ribbon = c.highlight
+    ? `<div class="card-ribbon" style="background:${ribbonColor}">★ 重點推薦</div>` : '';
+
+  const domains = (c.domains || []).map(d => {
+    const meta = DOMAIN_META[d] || { icon:'', color:'#64748b' };
+    return `<span class="domain-pill"
+      style="border-color:${meta.color}44;color:${meta.color};background:${meta.color}18">
+      ${meta.icon} ${d}
+    </span>`;
+  }).join('');
+
+  return `<div class="card${c.highlight ? ' highlight' : ''}">
+    ${ribbon}
+    <div class="card-top">
+      <div class="card-meta">
+        <div class="card-badges">
+          <span class="badge ${scopeCls}">${c.scope}</span>
+          ${c.level.map(l => `<span class="badge" style="border-color:#1e293b;background:#0a1220;color:#7a9bb8">${l}</span>`).join('')}
+          <span class="badge ${statusObj.cls}">${statusObj.label}</span>
+        </div>
+        <div class="card-title">${c.name}</div>
+        <div class="card-org">${c.organizer}</div>
+      </div>
+      <div class="card-chevron">▾</div>
+    </div>
+    <div class="card-domains">${domains}</div>
+    <div class="card-body">
+      <p class="card-desc">${c.description}</p>
+      <div class="card-info-grid">
+        <div class="info-box">
+          <div class="info-box-label" style="color:#64748b">📅 時程</div>
+          <div class="info-box-value" style="color:#cbd5e1">${c.schedule}</div>
+        </div>
+        <div class="info-box">
+          <div class="info-box-label" style="color:#ef4444">⏰ 報名截止</div>
+          <div class="info-box-value" style="color:#fca5a5">${c.deadline}</div>
+        </div>
+      </div>
+      <div class="card-actions">
+        <a class="btn-link" href="${c.url}" target="_blank" rel="noopener noreferrer">
+          🔗 前往官方網站
+        </a>
+        <span class="card-updated">更新：${c.updated}</span>
+      </div>
+    </div>
+  </div>`;
+}
+
+// ── SCROLL TOP ────────────────────────────────────────────────────────────────
+const scrollBtn = document.getElementById('scrollTop');
+window.addEventListener('scroll', () => {
+  scrollBtn.classList.toggle('visible', window.scrollY > 400);
+});
+scrollBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+// ── START ─────────────────────────────────────────────────────────────────────
+loadData();
+</script>
+</body>
+</html>
