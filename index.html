@@ -41,6 +41,23 @@
       --radius:    10px;
       --radius-lg: 14px;
     }
+
+    body.light-mode {
+      --bg:        #f8fafc;
+      --bg-card:   #ffffff;
+      --bg-deep:   #f1f5f9;
+      --border:    #cbd5e1;
+      --border-hi: #94a3b8;
+      --text-1:    #0f172a;
+      --text-2:    #475569;
+      --text-3:    #64748b;
+      --accent:    #2563eb;
+      --gold:      #d97706;
+      --green:     #16a34a;
+      --red:       #b91c1c;
+      --purple:    #7c3aed;
+    }
+
     html { scroll-behavior: smooth; }
     body {
       font-family: var(--font-body);
@@ -231,6 +248,43 @@
       letter-spacing: .05em;
       color: #000;
     }
+
+    .btn-theme {
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      background: var(--bg-card);
+      color: var(--text-1);
+      padding: 6px 12px;
+      font-size: 11px;
+      font-weight: 700;
+      margin-top: 4px;
+      transition: all .15s;
+    }
+
+    .btn-theme:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    .card.status-closed {
+      opacity: 0.75;
+      filter: saturate(0.8) brightness(0.96);
+      border-color: #f87171;
+      background: #1f1f1f;
+    }
+
+    body.light-mode .card.status-closed {
+      background: #f8f3f3;
+    }
+
+    .card.status-soon {
+      border-color: #f59e0b;
+    }
+
+    .card.status-open {
+      border-color: #10b981;
+    }
+
     .card-top {
       display: flex;
       justify-content: space-between;
@@ -439,6 +493,7 @@
     <span>符合 <strong>108 課綱</strong> 素養導向</span>
     <span id="totalCount">共 <strong>—</strong> 項競賽</span>
     <span>🗓 2026 年持續更新</span>
+    <button id="themeToggle" class="btn-theme" type="button">🌗 淺色模式</button>
   </div>
 </header>
 
@@ -532,6 +587,28 @@ const STATUS_MAP = {
   '即將開放': { cls: 'status-soon',    label: '🟡 即將開放' },
   '已截止':   { cls: 'status-closed',  label: '🔴 已截止' },
 };
+
+function setTheme(mode) {
+  const isLight = mode === 'light';
+  document.body.classList.toggle('light-mode', isLight);
+  document.body.classList.toggle('dark-mode', !isLight);
+  localStorage.setItem('theme', mode);
+  const btn = document.getElementById('themeToggle');
+  if (btn) {
+    btn.textContent = isLight ? '🌙 深色模式' : '🌗 淺色模式';
+  }
+}
+
+function initTheme() {
+  const saved = localStorage.getItem('theme') || 'dark';
+  setTheme(saved);
+  const btn = document.getElementById('themeToggle');
+  if (btn) {
+    btn.addEventListener('click', () => {
+      setTheme(document.body.classList.contains('light-mode') ? 'dark' : 'light');
+    });
+  }
+}
 
 // ── STATE ───────────────────────────────────────────────────────────────────
 let allData = [];
@@ -627,8 +704,8 @@ function getFiltered() {
 // ── RENDER ───────────────────────────────────────────────────────────────────
 function render() {
   const filtered = getFiltered();
-  const domestic = filtered.filter(c => c.scope !== '國際');
-  const intl     = filtered.filter(c => c.scope === '國際');
+  const active = filtered.filter(c => c.status !== '已截止');
+  const closed = filtered.filter(c => c.status === '已截止');
 
   // result count
   let countMsg = `共找到 <strong>${filtered.length}</strong> 項競賽`;
@@ -645,13 +722,13 @@ function render() {
   }
 
   let html = '';
-  if (domestic.length) {
-    html += sectionHeader('🇹🇼 國內競賽', '#60a5fa', domestic.length);
-    html += `<div class="card-list">${domestic.map(cardHTML).join('')}</div>`;
+  if (active.length) {
+    html += sectionHeader('🟢 報名中/即將開放競賽', '#10b981', active.length);
+    html += `<div class="card-list">${active.map(cardHTML).join('')}</div>`;
   }
-  if (intl.length) {
-    html += sectionHeader('🌍 國際競賽', '#fbbf24', intl.length);
-    html += `<div class="card-list">${intl.map(cardHTML).join('')}</div>`;
+  if (closed.length) {
+    html += sectionHeader('🔴 已截止競賽', '#ef4444', closed.length);
+    html += `<div class="card-list">${closed.map(cardHTML).join('')}</div>`;
   }
   document.getElementById('listContainer').innerHTML = html;
 
@@ -679,6 +756,7 @@ function sectionHeader(label, color, count) {
 function cardHTML(c) {
   const scopeCls  = SCOPE_CLASS[c.scope] || '';
   const statusObj = STATUS_MAP[c.status] || { cls:'status-unknown', label: c.status || '—' };
+  const cardClass  = `card ${statusObj.cls}`;
 
   const ribbonColor = c.scope === '國際' ? '#f59e0b' : '#3b82f6';
   const ribbon = c.highlight
@@ -692,7 +770,7 @@ function cardHTML(c) {
     </span>`;
   }).join('');
 
-  return `<div class="card${c.highlight ? ' highlight' : ''}">
+  return `<div class="${cardClass}${c.highlight ? ' highlight' : ''}">
     ${ribbon}
     <div class="card-top">
       <div class="card-meta">
@@ -737,6 +815,7 @@ window.addEventListener('scroll', () => {
 scrollBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
 
 // ── START ─────────────────────────────────────────────────────────────────────
+initTheme();
 loadData();
 </script>
 </body>
