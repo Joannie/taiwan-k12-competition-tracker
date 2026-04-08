@@ -25,22 +25,6 @@ from pathlib import Path
 BASE = Path(__file__).parent
 JSON_FILE = BASE / "competitions.json"
 HTML_FILE = BASE / "index.html"
-TRACKED_FILE = BASE / "tracked.md"
-
-
-def parse_tracked(file_path):
-    tracked = {'ids': set(), 'names': set(), 'urls': set()}
-    if not file_path.exists():
-        return tracked
-    with open(file_path, encoding='utf-8') as f:
-        for line in f:
-            line = line.strip()
-            match = re.match(r'^\|\s*(\d+)\s*\|\s*(.*?)\s*\|\s*(https?://[^\s\|]+)\s*\|', line)
-            if match:
-                tracked['ids'].add(int(match.group(1)))
-                tracked['names'].add(match.group(2).strip())
-                tracked['urls'].add(match.group(3).rstrip('/'))
-    return tracked
 
 
 def main():
@@ -58,23 +42,6 @@ def main():
         sys.exit(1)
 
     print(f"   ✅ 成功讀取 {len(data)} 筆競賽資料")
-
-    # tracked.md 比對提醒
-    tracked = parse_tracked(TRACKED_FILE)
-    missing = []
-    for item in data:
-        url = str(item.get('url','')).rstrip('/')
-        if (item.get('id') not in tracked['ids']
-            and item.get('name') not in tracked['names']
-            and url not in tracked['urls']):
-            missing.append(item)
-
-    if missing:
-        print("⚠️  這些競賽尚未出現在 tracked.md，請確認是否需要同步：")
-        for item in missing:
-            print(f"   - id={item.get('id')} name={item.get('name')} url={item.get('url')}")
-    else:
-        print("   ✅ tracked.md 已包含所有 competitions.json 條目。")
 
     # 基本欄位驗證
     required = {"id", "name", "scope", "domains", "level",

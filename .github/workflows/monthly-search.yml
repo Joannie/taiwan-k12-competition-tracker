@@ -1,0 +1,106 @@
+name: 每月自動搜尋新競賽
+
+on:
+  # 每月 1 號 UTC 01:00（台灣時間早上 9:00）自動執行
+  schedule:
+    - cron: '0 1 1 * *'
+
+  # 也可以手動觸發（在 GitHub Actions 頁面點 Run workflow）
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: '模擬執行（不實際修改檔案）'
+        required: false
+        default: 'false'
+        type: boolean
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  search-and-update:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      # 1. 取得程式碼
+      - name: 📥 Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      # 2. 設定 Python 環境
+      - name: 🐍 Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      # 3. 安裝相依套件
+      - name: 📦 Install dependencies
+        run: |
+          pip install anthropic
+
+      # 4. 執行每月搜尋腳本
+      - name: 🔍 執行每月自動搜尋
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: |
+          python3 monthly_search.py
+
+      # 5. 讀取新增筆數
+      - name: 📊 讀取搜尋結果
+        id: check_results
+        run: |
+          COUNT=$(cat new_count.txt 2>/dev/null || echo "0")
+          echo "new_count=$COUNT" >> $GITHUB_OUTPUT
+          echo "本次新增競賽：$COUNT 筆"
+
+      # 6. 如果有新競賽，建立 Pull Request
+      - name: 📬 建立 Pull Request
+        if: steps.check_results.outputs.new_count != '0'
+        uses: peter-evans/create-pull-request@v6
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          commit-message: |
+            🤖 每月自動更新：新增 ${{ steps.check_results.outputs.new_count }} 筆競賽
+          branch: auto-update/monthly-${{ github.run_number }}
+          delete-branch: true
+          title: |
+            🔍 每月自動更新：新增 ${{ steps.check_results.outputs.new_count }} 筆競賽
+          body-path: pr_body.txt
+          labels: |
+            auto-update
+            needs-review
+
+      # 7. 如果沒有新競賽，建立通知 Issue
+      - name: 📭 無新競賽通知
+        if: steps.check_results.outputs.new_count == '0'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const { data: issues } = await github.rest.issues.listForRepo({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              labels: 'monthly-report',
+              state: 'open'
+            });
+
+            // 關閉上個月的舊通知
+            for (const issue of issues) {
+              await github.rest.issues.update({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: issue.number,
+                state: 'closed'
+              });
+            }
+
+            // 建立新通知
+            await github.rest.issues.create({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              title: `📭 ${new Date().toISOString().slice(0,7)} 每月搜尋：本月無新競賽`,
+              body: `## 每月自動搜尋結果\n\n本月搜尋未發現尚未收錄的新競賽。\n\n如有遺漏，可手動新增或重新觸發搜尋。\n\n> 自動關閉於下個月搜尋完成後。`,
+              labels: ['monthly-report']
+            });

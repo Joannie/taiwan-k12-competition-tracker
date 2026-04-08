@@ -11,29 +11,29 @@
     /* ── RESET & BASE ── */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root {
-      --bg:        #0b1730;
-      --bg-card:   #132948;
-      --bg-deep:   #0d2440;
-      --border:    #2a4f72;
-      --border-hi: #3a6c96;
-      --text-1:    #eaf2ff;
-      --text-2:    #b3c8e8;
-      --text-3:    #8ea8c6;
-      --accent:    #2fa7ff;
-      --gold:      #ffbf60;
-      --green:     #38d9a9;
-      --red:       #f37272;
-      --purple:    #a689f5;
+      --bg:        #07101e;
+      --bg-card:   #0d1829;
+      --bg-deep:   #060d17;
+      --border:    #1a2840;
+      --border-hi: #1e3a5f;
+      --text-1:    #e2eaf4;
+      --text-2:    #7a9bb8;
+      --text-3:    #3a566e;
+      --accent:    #3b82f6;
+      --gold:      #f59e0b;
+      --green:     #10b981;
+      --red:       #ef4444;
+      --purple:    #8b5cf6;
 
-      --d-ai:      #38bdf8;
-      --d-math:    #4f46e5;
-      --d-lang:    #fb7185;
-      --d-art:     #a78bfa;
-      --d-sci:     #22c55e;
-      --d-stem:    #2fa7ff;
-      --d-cross:   #7dd3fc;
-      --d-social:  #34d399;
-      --d-edu:     #60a5fa;
+      --d-ai:      #f59e0b;
+      --d-math:    #3b82f6;
+      --d-lang:    #ec4899;
+      --d-art:     #a855f7;
+      --d-sci:     #10b981;
+      --d-stem:    #06b6d4;
+      --d-cross:   #f97316;
+      --d-social:  #84cc16;
+      --d-edu:     #8b5cf6;
       --d-tech:    #64748b;
 
       --font-body: 'Noto Sans TC', sans-serif;
@@ -41,34 +41,6 @@
       --radius:    10px;
       --radius-lg: 14px;
     }
-
-    body.light-mode {
-      --bg:        #f4f8ff;
-      --bg-card:   #ffffff;
-      --bg-deep:   #e8f1fc;
-      --border:    #bfd4ea;
-      --border-hi: #95b5d8;
-      --text-1:    #0f2a4d;
-      --text-2:    #385f8c;
-      --text-3:    #5f7d9e;
-      --accent:    #2f84ff;
-      --gold:      #f29d4c;
-      --green:     #2ebe8c;
-      --red:       #dc5f61;
-      --purple:    #8678f2;
-
-      --d-ai:      #22b8cf;
-      --d-math:    #3b5bdb;
-      --d-lang:    #f4707b;
-      --d-art:     #a78bfa;
-      --d-sci:     #22c55e;
-      --d-stem:    #3b82f6;
-      --d-cross:   #60a5fa;
-      --d-social:  #34d399;
-      --d-edu:     #4f46e5;
-      --d-tech:    #64748b;
-    }
-
     html { scroll-behavior: smooth; }
     body {
       font-family: var(--font-body);
@@ -83,7 +55,7 @@
 
     /* ── HERO ── */
     .hero {
-      background: linear-gradient(180deg, #15406c 0%, var(--bg) 85%);
+      background: linear-gradient(180deg, #0d1f38 0%, var(--bg) 100%);
       border-bottom: 1px solid var(--border);
       padding: 48px 24px 36px;
       text-align: center;
@@ -247,8 +219,7 @@
       box-shadow: 0 10px 40px #00000055;
     }
     .card.highlight {
-      background: linear-gradient(135deg, rgba(47,167,255,0.18), rgba(16,120,196,0.16));
-      border-color: var(--accent);
+      background: linear-gradient(135deg, #0f1e30, #0a1520);
     }
     .card-ribbon {
       position: absolute;
@@ -260,43 +231,6 @@
       letter-spacing: .05em;
       color: #000;
     }
-
-    .btn-theme {
-      border: 1px solid var(--border);
-      border-radius: 999px;
-      background: var(--bg-card);
-      color: var(--text-1);
-      padding: 6px 12px;
-      font-size: 11px;
-      font-weight: 700;
-      margin-top: 4px;
-      transition: all .15s;
-    }
-
-    .btn-theme:hover {
-      border-color: var(--accent);
-      color: var(--accent);
-    }
-
-    .card.status-closed {
-      opacity: 0.84;
-      border-color: #f87171;
-      background: rgba(240, 145, 145, 0.12);
-    }
-
-    body.light-mode .card.status-closed {
-      background: rgba(242, 156, 156, 0.18);
-    }
-
-    .card.status-soon {
-      border-color: #f59e0b;
-      background: rgba(254, 223, 165, 0.17);
-    }
-
-    .card.status-open {
-      border-color: #10b981;
-    }
-
     .card-top {
       display: flex;
       justify-content: space-between;
@@ -505,7 +439,6 @@
     <span>符合 <strong>108 課綱</strong> 素養導向</span>
     <span id="totalCount">共 <strong>—</strong> 項競賽</span>
     <span>🗓 2026 年持續更新</span>
-    <button id="themeToggle" class="btn-theme" type="button">🌗 淺色模式</button>
   </div>
 </header>
 
@@ -599,28 +532,6 @@ const STATUS_MAP = {
   '即將開放': { cls: 'status-soon',    label: '🟡 即將開放' },
   '已截止':   { cls: 'status-closed',  label: '🔴 已截止' },
 };
-
-function setTheme(mode) {
-  const isLight = mode === 'light';
-  document.body.classList.toggle('light-mode', isLight);
-  document.body.classList.toggle('dark-mode', !isLight);
-  localStorage.setItem('theme', mode);
-  const btn = document.getElementById('themeToggle');
-  if (btn) {
-    btn.textContent = isLight ? '🌙 深色模式' : '🌗 淺色模式';
-  }
-}
-
-function initTheme() {
-  const saved = localStorage.getItem('theme') || 'dark';
-  setTheme(saved);
-  const btn = document.getElementById('themeToggle');
-  if (btn) {
-    btn.addEventListener('click', () => {
-      setTheme(document.body.classList.contains('light-mode') ? 'dark' : 'light');
-    });
-  }
-}
 
 // ── STATE ───────────────────────────────────────────────────────────────────
 let allData = [];
@@ -716,8 +627,8 @@ function getFiltered() {
 // ── RENDER ───────────────────────────────────────────────────────────────────
 function render() {
   const filtered = getFiltered();
-  const active = filtered.filter(c => c.status !== '已截止');
-  const closed = filtered.filter(c => c.status === '已截止');
+  const domestic = filtered.filter(c => c.scope !== '國際');
+  const intl     = filtered.filter(c => c.scope === '國際');
 
   // result count
   let countMsg = `共找到 <strong>${filtered.length}</strong> 項競賽`;
@@ -734,13 +645,13 @@ function render() {
   }
 
   let html = '';
-  if (active.length) {
-    html += sectionHeader('🟢 報名中/即將開放競賽', '#10b981', active.length);
-    html += `<div class="card-list">${active.map(cardHTML).join('')}</div>`;
+  if (domestic.length) {
+    html += sectionHeader('🇹🇼 國內競賽', '#60a5fa', domestic.length);
+    html += `<div class="card-list">${domestic.map(cardHTML).join('')}</div>`;
   }
-  if (closed.length) {
-    html += sectionHeader('🔴 已截止競賽', '#ef4444', closed.length);
-    html += `<div class="card-list">${closed.map(cardHTML).join('')}</div>`;
+  if (intl.length) {
+    html += sectionHeader('🌍 國際競賽', '#fbbf24', intl.length);
+    html += `<div class="card-list">${intl.map(cardHTML).join('')}</div>`;
   }
   document.getElementById('listContainer').innerHTML = html;
 
@@ -768,7 +679,6 @@ function sectionHeader(label, color, count) {
 function cardHTML(c) {
   const scopeCls  = SCOPE_CLASS[c.scope] || '';
   const statusObj = STATUS_MAP[c.status] || { cls:'status-unknown', label: c.status || '—' };
-  const cardClass  = `card ${statusObj.cls}`;
 
   const ribbonColor = c.scope === '國際' ? '#f59e0b' : '#3b82f6';
   const ribbon = c.highlight
@@ -782,7 +692,7 @@ function cardHTML(c) {
     </span>`;
   }).join('');
 
-  return `<div class="${cardClass}${c.highlight ? ' highlight' : ''}">
+  return `<div class="card${c.highlight ? ' highlight' : ''}">
     ${ribbon}
     <div class="card-top">
       <div class="card-meta">
@@ -827,7 +737,6 @@ window.addEventListener('scroll', () => {
 scrollBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
 
 // ── START ─────────────────────────────────────────────────────────────────────
-initTheme();
 loadData();
 </script>
 </body>
