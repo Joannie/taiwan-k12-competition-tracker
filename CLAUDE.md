@@ -1,95 +1,190 @@
-# 專案說明：台灣 K12 競賽資料庫
+# 台灣 K12 競賽資料庫 — Claude Code 工作說明書
+
+## 專案資訊
+
+- **本機路徑：** `D:\Projects\taiwan-k12-competition-tracker`
+- **GitHub Repo：** `https://github.com/joannie/taiwan-k12-competition-tracker`
+- **線上網站：** `https://joannie.github.io/taiwan-k12-competition-tracker/`
+
+---
 
 ## 專案結構
-- `competitions.json` — 所有競賽資料，**唯一需要維護的資料檔**
-- `index.html` — 網站主體，資料透過 sync.py 內嵌，不要手動改
-- `sync.py` — 同步工具，每次更新資料後必須執行
 
-## 新增或更新競賽的標準流程
+```
+D:\Projects\taiwan-k12-competition-tracker\
+├── competitions.json    ← 所有競賽資料（唯一需要維護的資料檔）
+├── tracked.md           ← 已收錄清單（防止重複，自動維護）
+├── index.html           ← 網站主體（資料透過 sync.py 內嵌，不要手動改）
+├── sync.py              ← 同步工具（改完 JSON 後必須執行）
+├── monthly_search.py    ← 每月自動搜尋腳本
+├── CLAUDE.md            ← 本說明文件
+└── .github/workflows/   ← GitHub Actions 自動部署設定
+```
 
-每次收到新增或修改競賽的指令，請依序執行：
+---
 
-1. 修改 `competitions.json`（新增或編輯資料）
-2. 執行 `python3 sync.py` 確認同步成功
-3. 執行 `git add competitions.json index.html`
-4. 執行 `git commit -m "更新：[說明]"`
-5. 執行 `git push`
+## 重要規則（每次執行前必讀）
+
+1. **永遠不要**在未經使用者確認的情況下執行 `git push`
+2. **永遠**在執行前列出確認清單
+3. **永遠**在修改 `competitions.json` 後執行 `python sync.py`
+4. **同步更新** `tracked.md`，不要讓它與 `competitions.json` 脫節
+5. 修改任何檔案前，先讀取該檔案確認目前內容與格式
+
+---
 
 ## competitions.json 欄位規則
+
 ```json
 {
-  "id": 999,              // 唯一整數，國內 100–199，國際 200–299
-  "name": "競賽名稱",
-  "scope": "國內",        // "國內" / "國內（接軌國際）" / "國際"
-  "domains": ["AI工具應用"],  // 見下方可用清單
+  "id": 999,
+  "name": "競賽完整名稱",
+  "scope": "國內",
+  "domains": ["AI工具應用"],
   "level": ["國中", "高中"],
   "organizer": "主辦單位",
   "description": "說明文字（50–150字）",
   "schedule": "時程說明",
-  "deadline": "截止日期",
+  "deadline": "YYYY/MM/DD 格式（讓系統可判斷是否過期）",
   "url": "https://官方網站",
   "tags": ["標籤1", "標籤2"],
-  "highlight": false,     // true = 顯示重點推薦
-  "status": "即將開放",   // "報名中"/"開放中"/"即將開放"/"已截止"
-  "updated": "2026-03"    // 今天的年月
+  "highlight": false,
+  "status": "即將開放",
+  "updated": "YYYY-MM"
 }
 ```
 
-## 可用 domains 清單
-AI工具應用 / 數學 / 語文/文學 / 視覺藝術 / 科學研究 /
-STEM / 跨域創新 / 社會議題 / 教育科技 / 科技
+**scope** 只能填：`"國內"` / `"國內（接軌國際）"` / `"國際"`
+
+**domains** 只能從以下選：
+`AI工具應用` / `數學` / `語文/文學` / `視覺藝術` / `科學研究` /
+`STEM` / `跨域創新` / `社會議題` / `教育科技` / `科技`
+
+**level** 只能填：`"國中"` / `"高中"`
+
+**status** 只能填：`"報名中"` / `"開放中"` / `"即將開放"` / `"已截止"`
+
+---
+
+## tracked.md 維護規則
+
+- 國內競賽新 ID 從「下一個可用 ID」欄位讀取（目前：**110**）
+- 國際競賽新 ID 從「下一個可用 ID」欄位讀取（目前：**222**）
+- 每次新增競賽後：
+  1. 在對應表格末尾加入新列：`| ID | 競賽名稱 | 官方網址 |`
+  2. 更新「下一個可用 ID」的數字
+  3. 在「搜尋紀錄」加一列
+
+---
+
+## 自動更新流程（收到新競賽資料時）
+
+### 步驟一：執行前，先列出確認清單
+
+格式如下，讓使用者確認後才繼續：
+
+```
+━━━ 請確認以下變更 ━━━
+
+📝 competitions.json 新增：
+  - [ID] 競賽名稱（scope，學段）
+  - [ID] 競賽名稱（scope，學段）
+  ...共 N 筆
+
+📋 tracked.md 更新：
+  - 新增 N 列到國際/國內競賽表格
+  - 下一個可用 ID：國內 110 → 110 / 國際 222 → 223
+
+💬 commit message：
+  「新增：XXX 等 N 筆競賽」
+
+確認後輸入「執行」繼續，或說明需要修改的地方。
+━━━━━━━━━━━━━━━━━━━━━
+```
+
+### 步驟二：使用者說「執行」後，依序完成
+
+```bash
+# 1. 修改 competitions.json（新增競賽到陣列末尾）
+# 2. 修改 tracked.md（新增列、更新 ID、加搜尋紀錄）
+# 3. 同步資料到 index.html
+python sync.py
+
+# 4. 加入暫存區
+git add competitions.json index.html tracked.md
+
+# 5. commit
+git commit -m "新增：XXX 等 N 筆競賽"
+
+# 6. push（最後一步，再次確認才執行）
+git push
+```
+
+### 步驟三：完成後回報結果
+
+```
+✅ 完成！
+   新增：N 筆競賽
+   目前總數：XX 筆
+   網站更新：約 1 分鐘後生效
+   網址：https://joannie.github.io/taiwan-k12-competition-tracker/
+```
+
+---
+
+## 狀態更新流程（修改現有競賽的狀態）
+
+當競賽狀態改變時（例如「即將開放」→「報名中」，或「報名中」→「已截止」）：
+
+```bash
+# 讀取 competitions.json，找到對應競賽，修改 status 和 updated 欄位
+# 執行同步
+python sync.py
+# commit
+git add competitions.json index.html
+git commit -m "更新：XXX 狀態改為「已截止」"
+git push
+```
+
+---
+
+## 移除過期競賽流程
+
+手動移除時：
+1. 從 `competitions.json` 刪除該筆資料
+2. 在 `tracked.md` 對應列加上刪除線：`~~競賽名稱~~`
+3. 執行 `python sync.py`
+4. commit 並 push
+
+---
+
+## 常用指令速查
+
+```bash
+# 查看目前競賽總數
+python -c "import json; d=json.load(open('competitions.json',encoding='utf-8')); print(f'共 {len(d)} 筆競賽')"
+
+# 查看所有已截止的競賽
+python -c "import json; d=json.load(open('competitions.json',encoding='utf-8')); [print(c['name']) for c in d if c['status']=='已截止']"
+
+# 手動執行同步
+python sync.py
+
+# 手動執行每月搜尋（需要 ANTHROPIC_API_KEY 環境變數）
+python monthly_search.py
+
+# 查看 git 狀態
+git status
+
+# 查看最近的 commit 紀錄
+git log --oneline -10
+```
+
+---
 
 ## 注意事項
-- 每次修改完 competitions.json，一定要執行 sync.py 才能更新網站
-- push 之前先確認 sync.py 顯示「🎉 同步完成！」
-- commit message 請用中文，格式：`新增：XXX` 或 `更新：XXX 截止日`
 
-## 防止重複收錄
-
-每次執行搜尋或新增競賽後，必須同步更新 `tracked.md`：
-1. 在對應的表格裡加一行（ID、名稱、網址）
-2. 更新「下一個可用 ID」的數字
-3. 在「搜尋紀錄」加一行（日期、關鍵字、新增筆數）
-
-這樣下次搜尋時，Claude.ai 可以對照清單避免重複。
-```
-
----
-
-### 日後搜尋新競賽的固定句型
-
-每次來找我搜尋，就用這個句型：
-```
-以下是我目前已收錄的競賽清單（tracked.md 內容）：
-[貼上 tracked.md 的表格部分]
-
-請幫我搜尋 2026 下半年到 2027 年，
-台灣國中高中可以參加的新競賽（科技/AI/數學/語文/藝術），
-排除以上已收錄的項目，
-只回傳真正新的競賽，整理成 competitions.json 格式。
-國內新競賽 ID 從 110 開始，國際從 211 開始。
-```
-
-我收到這個訊息後，會：
-1. 讀取你的已收錄清單
-2. 搜尋時自動跳過這些競賽
-3. 只輸出新的 JSON 片段給你貼上
-
----
-
-### 完整更新流程（加入防重複機制後）
-```
-【在 Claude.ai】
-貼上 tracked.md → 請我搜尋新競賽
-→ 我回傳新的 JSON 片段
-
-【複製貼上到 competitions.json 尾端】
-
-【在 VS Code 終端機】
-python3 sync.py
-git add competitions.json index.html tracked.md
-git commit -m "新增：XXX 等 N 筆競賽"
-git push
-
-【更新 tracked.md】
-把新競賽加進表格，更新 ID 編號
+- Windows 路徑使用反斜線 `\`，但 Python 和 git 指令中用正斜線 `/` 或雙反斜線 `\\` 均可
+- 確保 Python 已加入 PATH（執行 `python --version` 確認）
+- 確保 git 已設定帳號（`git config user.name` 確認）
+- 每次 push 前確認 git remote 指向正確的 repo：`git remote -v`

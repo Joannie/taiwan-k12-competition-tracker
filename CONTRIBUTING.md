@@ -81,7 +81,7 @@
 
 ## 📝 開 Issue 回報問題
 
-不確定如何填寫？直接 [開一個 Issue](https://github.com/joannie/taiwan-k12-competition-tracker/issues/new) 告訴我們：
+不確定如何填寫？直接 [開一個 Issue](https://github.com/YOUR_GITHUB_ACCOUNT/taiwan-k12-competition-tracker/issues/new) 告訴我們：
 - 競賽名稱
 - 官方網站連結
 - 你認為適合的學段與領域

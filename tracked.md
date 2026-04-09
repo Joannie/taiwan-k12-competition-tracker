@@ -36,13 +36,24 @@
 | 208 | Google Science Fair | https://sciencefair.withgoogle.com/ |
 | 209 | WRO 世界機器人奧林匹亞 | https://wro-association.org/ |
 | 210 | FIRST LEGO League（FLL） | https://www.firstlegoleague.org/ |
+| 211 | Science Olympiad | https://www.soinc.org/ |
+| 212 | Future Problem Solving Program International（FPSPI） | https://www.fpspi.org/ |
+| 213 | eCYBERMISSION（虛擬 STEM 競賽） | https://www.ecybermission.com/ |
+| 214 | Broadcom MASTERS（中學科學技術工程數學獎） | https://www.societyforscience.org/broadcom-masters/ |
+| 215 | American Rocketry Challenge（TARC） | https://www.rocketcontest.org/ |
+| 216 | National Science Bowl（美國能源部全國科學碗） | https://science.osti.gov/wdts/nsb |
+| 217 | ASA Statistics Project Competition（統計專題競賽） | https://www.amstat.org/asa/education/statistics-project-competition.aspx |
+| 218 | ASA Data Visualization Poster Competition（數據視覺化海報競賽） | https://www.amstat.org/asa/education/poster-and-project-competitions.aspx |
+| 219 | American Computer Science League（ACSL） | https://www.acsl.org/ |
+| 220 | VEX Robotics Competition（VRC 機器人競賽） | https://vrc-kb.recf.org/ |
+| 221 | Desafiando el Riesgo（風險數學競賽） | https://www.actuarialfoundation.org/programs/high-school/desafiando-el-riesgo/ |
 
 ---
 
 ## 下一個可用 ID
 
 - 國內新競賽：從 **110** 開始
-- 國際新競賽：從 **211** 開始
+- 國際新競賽：從 **222** 開始
 
 ---
 
@@ -51,3 +62,4 @@
 | 日期 | 搜尋關鍵字 | 新增筆數 |
 |------|-----------|---------|
 | 2026-03 | 台灣國中高中科技AI創意競賽、跨領域國際競賽 | 19 筆（初始版本）|
+| 2026-04 | competitionsciences.org 13–18歲國際競賽 URL驗證 | 11 筆（國際）|

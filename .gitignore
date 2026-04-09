@@ -1,12 +1,27 @@
-# OS files
+# ── 本機專用檔案（不上傳 GitHub）────────────────────────────────
+# CLAUDE.md 含有本機路徑等個人資訊，只在本機使用
+CLAUDE.md
+
+# 環境變數檔（萬一本機測試時建立了 .env）
+.env
+.env.local
+.env*.local
+
+# monthly_search.py 執行時產生的暫存檔
+pr_body.txt
+new_count.txt
+change_count.txt
+removed_count.txt
+
+# ── OS 系統檔 ────────────────────────────────────────────────────
 .DS_Store
 Thumbs.db
 
-# Editor files
+# ── 編輯器設定 ───────────────────────────────────────────────────
 .vscode/
 .idea/
 *.swp
 *.swo
 
-# Logs
+# ── 日誌檔 ───────────────────────────────────────────────────────
 *.log

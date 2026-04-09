@@ -4,7 +4,7 @@
 > 符合 108 課綱素養導向精神 · 2026 年起持續更新
 
 **🌐 線上查詢網址：**  
-`https://[你的GitHub帳號].github.io/taiwan-k12-competition-tracker/`
+`https://YOUR_GITHUB_ACCOUNT.github.io/taiwan-k12-competition-tracker/`
 
 ---
 
@@ -162,7 +162,7 @@ git push origin main
 3. Source 選擇 **Deploy from a branch**
 4. Branch 選擇 **main** → 目錄選 **/ (root)**
 5. 點擊 **Save**
-6. 等 1–2 分鐘，網址就會出現：`https://[帳號].github.io/taiwan-k12-competition-tracker/`
+6. 等 1–2 分鐘，網址就會出現：`https://YOUR_GITHUB_ACCOUNT.github.io/taiwan-k12-competition-tracker/`
 
 ### 日後更新競賽資料
 
@@ -225,7 +225,7 @@ taiwan-k12-competition-tracker/
 
 歡迎透過以下方式貢獻：
 
-1. **GitHub Issues**（推薦）：[點此開 Issue](https://github.com/joannie/taiwan-k12-competition-tracker/issues/new)  
+1. **GitHub Issues**（推薦）：[點此開 Issue](https://github.com/YOUR_GITHUB_ACCOUNT/taiwan-k12-competition-tracker/issues/new)  
    請包含：競賽名稱、官方連結、適合學段、截止日期
 
 2. **Pull Request**：直接修改 `competitions.json`，送出 PR

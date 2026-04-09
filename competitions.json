@@ -3,14 +3,26 @@
     "id": 101,
     "name": "數感盃：AI 共創新詩圖文競賽",
     "scope": "國內",
-    "domains": ["數學", "語文/文學", "AI工具應用"],
-    "level": ["國中"],
+    "domains": [
+      "數學",
+      "語文/文學",
+      "AI工具應用"
+    ],
+    "level": [
+      "國中"
+    ],
     "organizer": "數感實驗室",
     "description": "以數學為靈感創作詩作，並用 AI 圖像生成工具（Gemini API）共創圖像，評審同時評估數學思維、文采與視覺效果。國七組單獨開放報名，是少見的「數學×文學×AI」三合一競賽。",
     "schedule": "2025 年 12 月起開放創作；複審 2026/2/24；頒獎於 2026 年 3 月",
     "deadline": "2026/1/23（已截止，下屆請關注官方公告）",
     "url": "https://ai-award.numeracylab.com/",
-    "tags": ["數學", "文學", "AI生成", "詩", "圖像"],
+    "tags": [
+      "數學",
+      "文學",
+      "AI生成",
+      "詩",
+      "圖像"
+    ],
     "highlight": true,
     "status": "已截止",
     "updated": "2026-03"
@@ -19,14 +31,25 @@
     "id": 102,
     "name": "全國高中職生成式 AI 創意競賽",
     "scope": "國內",
-    "domains": ["語文/文學", "視覺藝術", "AI工具應用"],
-    "level": ["高中"],
+    "domains": [
+      "語文/文學",
+      "視覺藝術",
+      "AI工具應用"
+    ],
+    "level": [
+      "高中"
+    ],
     "organizer": "中國科技大學資訊工程系",
     "description": "A 類：以 ChatGPT / Copilot / Gemini 生成 500 字以內中文短文或新詩；B 類：以 Midjourney / DALL-E / Stable Diffusion 生成圖像。純線上投稿，門檻低，適合語文或美術能力強的學生入門 AI 工具應用。",
     "schedule": "通常每年 2–3 月截止，115 學年度預計重新開放",
     "deadline": "預計 2027 年 3 月（請關注官方公告）",
     "url": "https://dcsie.gm.cute.edu.tw",
-    "tags": ["生成式AI", "語文", "圖像創作", "Prompt工程"],
+    "tags": [
+      "生成式AI",
+      "語文",
+      "圖像創作",
+      "Prompt工程"
+    ],
     "highlight": false,
     "status": "即將開放",
     "updated": "2026-03"
@@ -35,14 +58,25 @@
     "id": 103,
     "name": "育秀盃創意獎（高中 AI 應用競賽）",
     "scope": "國內",
-    "domains": ["跨域創新", "AI工具應用", "社會議題"],
-    "level": ["高中"],
+    "domains": [
+      "跨域創新",
+      "AI工具應用",
+      "社會議題"
+    ],
+    "level": [
+      "高中"
+    ],
     "organizer": "育秀教育基金會 / 神通資科",
     "description": "鼓勵高中職學生運用生成式 AI、機器學習或深度學習（含 MiAutoML）開發具社會價值的 AI 應用。指定主題包含 AI 輔助教學工具、個人化學習助手、ESG 解決方案，自訂主題亦可。",
     "schedule": "截止日：2026 年 5 月 10 日（本屆）；頒獎典禮：2026 年 6 月",
     "deadline": "2026/5/10",
     "url": "https://award.ysed.org.tw/competition/80/1",
-    "tags": ["生成式AI", "機器學習", "ESG", "社會創新"],
+    "tags": [
+      "生成式AI",
+      "機器學習",
+      "ESG",
+      "社會創新"
+    ],
     "highlight": false,
     "status": "報名中",
     "updated": "2026-03"
@@ -51,14 +85,26 @@
     "id": 104,
     "name": "全國科技教育創意實作競賽",
     "scope": "國內",
-    "domains": ["科技", "設計思考", "跨域創新"],
-    "level": ["國中", "高中"],
+    "domains": [
+      "科技",
+      "設計思考",
+      "跨域創新"
+    ],
+    "level": [
+      "國中",
+      "高中"
+    ],
     "organizer": "各縣市教育局 / 教育部",
     "description": "依 108 課綱，分「生活科技組」（設計製作）與「資訊科技組」（程式＋運算思維）。近年各縣市主題逐漸融入 AI、永續設計（SDGs），強調設計思考歷程而非純技術。",
     "schedule": "縣市賽：每年 3–5 月；全國賽：9–11 月",
     "deadline": "各縣市公告，通常 2–3 月報名",
     "url": "https://technology.chc.edu.tw/",
-    "tags": ["設計思考", "108課綱", "資訊科技", "生活科技"],
+    "tags": [
+      "設計思考",
+      "108課綱",
+      "資訊科技",
+      "生活科技"
+    ],
     "highlight": false,
     "status": "即將開放",
     "updated": "2026-03"
@@ -67,14 +113,25 @@
     "id": 105,
     "name": "全國中小學科學展覽會（全國科展）",
     "scope": "國內",
-    "domains": ["科學研究", "STEM"],
-    "level": ["國中", "高中"],
+    "domains": [
+      "科學研究",
+      "STEM"
+    ],
+    "level": [
+      "國中",
+      "高中"
+    ],
     "organizer": "國立臺灣科學教育館 / 教育部",
     "description": "台灣最具代表性的科學研究競賽，近年 AI、資料科學、環境科學、社會科學均可報名。入選作品可代表台灣參加臺灣國際科展，接軌 Regeneron ISEF。",
     "schedule": "縣市初賽：每年 2–4 月；全國決賽：7 月",
     "deadline": "各縣市約 12–1 月報名",
     "url": "https://twsf.ntsec.gov.tw",
-    "tags": ["科學研究", "STEM", "ISEF資格賽", "跨領域"],
+    "tags": [
+      "科學研究",
+      "STEM",
+      "ISEF資格賽",
+      "跨領域"
+    ],
     "highlight": true,
     "status": "報名中",
     "updated": "2026-03"
@@ -83,14 +140,24 @@
     "id": 106,
     "name": "臺灣國際科學展覽會（TISF）",
     "scope": "國內（接軌國際）",
-    "domains": ["科學研究", "STEM"],
-    "level": ["國中", "高中"],
+    "domains": [
+      "科學研究",
+      "STEM"
+    ],
+    "level": [
+      "國中",
+      "高中"
+    ],
     "organizer": "國立臺灣科學教育館",
     "description": "台灣代表角逐 Regeneron ISEF 的選拔管道。AI、資訊科學、行為科學、生態學等跨領域均可報名。獲選代表可於每年 5 月赴美與全球 75 國頂尖學生競技。",
     "schedule": "初審：每年 12 月；複審：隔年 2 月",
     "deadline": "每年 10/20–10/31 報名",
     "url": "https://twsf.ntsec.gov.tw",
-    "tags": ["科學研究", "國際接軌", "Regeneron ISEF"],
+    "tags": [
+      "科學研究",
+      "國際接軌",
+      "Regeneron ISEF"
+    ],
     "highlight": true,
     "status": "即將開放",
     "updated": "2026-03"
@@ -99,14 +166,24 @@
     "id": 107,
     "name": "WMI 世界數學邀請賽（台灣選拔賽）",
     "scope": "國內（接軌國際）",
-    "domains": ["數學"],
-    "level": ["國中", "高中"],
+    "domains": [
+      "數學"
+    ],
+    "level": [
+      "國中",
+      "高中"
+    ],
     "organizer": "中華數學協會",
     "description": "個人制數學競賽，覆蓋國小至高三，獲金銀銅獎者取得參加 7 月世界總決賽的資格。雖非 AI 競賽，但強調邏輯推理與計算思維，是 AI 學習路徑的重要數學基礎能力認證。",
     "schedule": "台灣選拔賽：每年 1 月；成績公布：2 月初；世界賽：7 月",
     "deadline": "通常 11–12 月報名",
     "url": "https://www.vipolpcs.com",
-    "tags": ["數學", "邏輯推理", "國際接軌", "個人賽"],
+    "tags": [
+      "數學",
+      "邏輯推理",
+      "國際接軌",
+      "個人賽"
+    ],
     "highlight": false,
     "status": "已截止",
     "updated": "2026-03"
@@ -115,14 +192,25 @@
     "id": 108,
     "name": "2026 START！AI 智慧小車全國競賽（第七屆）",
     "scope": "國內",
-    "domains": ["AI工具應用", "科技"],
-    "level": ["國中", "高中"],
+    "domains": [
+      "AI工具應用",
+      "科技"
+    ],
+    "level": [
+      "國中",
+      "高中"
+    ],
     "organizer": "桃園市立平鎮高中",
     "description": "分競賽組（程式控制小車任務）、創意組（主題：智慧物流，需企劃書+展示）、聯盟組（混齡）。創意組不限器材品牌，著重 AI 創意與設計說明，適合跨領域組隊。",
     "schedule": "創意組收件截止：2026/3/2；決賽：2026 年上半年",
     "deadline": "創意組：2026/3/2",
     "url": "https://sites.google.com/a/go.pymhs.tyc.edu.tw/startlearning/",
-    "tags": ["AI", "機器人", "智慧小車", "程式設計"],
+    "tags": [
+      "AI",
+      "機器人",
+      "智慧小車",
+      "程式設計"
+    ],
     "highlight": false,
     "status": "報名中",
     "updated": "2026-03"
@@ -131,14 +219,25 @@
     "id": 109,
     "name": "全國創意與智慧科技競賽 2026",
     "scope": "國內",
-    "domains": ["AI工具應用", "科技", "跨域創新"],
-    "level": ["高中"],
+    "domains": [
+      "AI工具應用",
+      "科技",
+      "跨域創新"
+    ],
+    "level": [
+      "高中"
+    ],
     "organizer": "國立臺北教育大學 / 台灣教育傳播暨科技學會",
     "description": "設「人工智慧組」「機器人創作組」，鼓勵高中生從發想、設計到作品實現完整歷程。今年與「ICEET 數位學習與教育科技國際研討會」共同舉辦，具備國際交流機會。",
     "schedule": "報名截止：2026/4/3；頒獎：2026/5/20（臺北教育大學）",
     "deadline": "2026/4/3",
     "url": "https://www.cacet.org/web/2026creation/index.html",
-    "tags": ["AI", "機器人", "創意設計", "教育科技"],
+    "tags": [
+      "AI",
+      "機器人",
+      "創意設計",
+      "教育科技"
+    ],
     "highlight": false,
     "status": "報名中",
     "updated": "2026-03"
@@ -147,14 +246,26 @@
     "id": 201,
     "name": "IOAI 國際人工智慧奧林匹亞",
     "scope": "國際",
-    "domains": ["AI工具應用", "數學", "科學研究"],
-    "level": ["高中"],
+    "domains": [
+      "AI工具應用",
+      "數學",
+      "科學研究"
+    ],
+    "level": [
+      "高中"
+    ],
     "organizer": "IOAI 國際組委會（UNESCO 認可）",
     "description": "全球最高規格 AI 學科競賽，由各國國家隊選拔，高中生參加個人賽（機器學習、NLP、演算法）。2026 年第三屆於哈薩克阿斯塔納舉行（8/2–8/8）。台灣尚待建立正式選拔體系，近鄰香港、中國均已有成熟選拔制度可參考。",
     "schedule": "IOAI 2026：2026/8/2–8/8，哈薩克阿斯塔納",
     "deadline": "各國選拔期程不同，請持續關注教育部及台灣資訊學科奧林匹亞（TOI）相關公告",
     "url": "https://ioai-official.org/",
-    "tags": ["AI", "機器學習", "NLP", "演算法", "國際奧林匹亞"],
+    "tags": [
+      "AI",
+      "機器學習",
+      "NLP",
+      "演算法",
+      "國際奧林匹亞"
+    ],
     "highlight": true,
     "status": "即將開放",
     "updated": "2026-03"
@@ -163,14 +274,27 @@
     "id": 202,
     "name": "WAICY 世界青少年人工智慧競賽",
     "scope": "國際",
-    "domains": ["AI工具應用", "視覺藝術", "跨域創新"],
-    "level": ["國中", "高中"],
+    "domains": [
+      "AI工具應用",
+      "視覺藝術",
+      "跨域創新"
+    ],
+    "level": [
+      "國中",
+      "高中"
+    ],
     "organizer": "WAICY（美國非營利組織）",
     "description": "6–18 歲皆可參加的全球 AI 競賽，設三大 Track：① AI 應用問題解決、② AI 生成藝術（AI-Generated Art）、③ AI 大語言模型 Prompt Engineering。可線上提交，無需到場，適合各種背景學生。",
     "schedule": "2026 年開放報名（持續關注官網）",
     "deadline": "請關注 waicy.org 官方公告",
     "url": "https://www.waicy.org/",
-    "tags": ["AI", "AI藝術", "Prompt工程", "6-18歲", "線上參賽"],
+    "tags": [
+      "AI",
+      "AI藝術",
+      "Prompt工程",
+      "6-18歲",
+      "線上參賽"
+    ],
     "highlight": true,
     "status": "即將開放",
     "updated": "2026-03"
@@ -179,14 +303,26 @@
     "id": 203,
     "name": "USAII Global AI Hackathon 2026",
     "scope": "國際",
-    "domains": ["AI工具應用", "跨域創新", "社會議題"],
-    "level": ["高中"],
+    "domains": [
+      "AI工具應用",
+      "跨域創新",
+      "社會議題"
+    ],
+    "level": [
+      "高中"
+    ],
     "organizer": "美國人工智慧研究院（USAII）",
     "description": "全球線上 AI Hackathon，預計 2026 年 6 月舉辦，高中生（9–12 年級）均可參加。團隊（1–5 人）設計 AI 解決方案，強調負責任 AI（Responsible AI），不需深度技術背景即可參加。",
     "schedule": "2026 年 6 月（詳細日程持續公告）",
     "deadline": "預計 2026 年 5 月開放報名",
     "url": "https://aihackathon.usaii.org/",
-    "tags": ["AI", "Hackathon", "社會影響力", "線上參賽", "負責任AI"],
+    "tags": [
+      "AI",
+      "Hackathon",
+      "社會影響力",
+      "線上參賽",
+      "負責任AI"
+    ],
     "highlight": false,
     "status": "即將開放",
     "updated": "2026-03"
@@ -195,14 +331,27 @@
     "id": 204,
     "name": "ISTE AI Innovator Challenge 2026",
     "scope": "國際",
-    "domains": ["AI工具應用", "跨域創新", "教育科技"],
-    "level": ["國中", "高中"],
+    "domains": [
+      "AI工具應用",
+      "跨域創新",
+      "教育科技"
+    ],
+    "level": [
+      "國中",
+      "高中"
+    ],
     "organizer": "ISTE + ASCD（國際教育科技學會）",
     "description": "K-12 學生運用 AI 素養解決社區問題，設計 AI 創新方案。完成 15 個 Studio 學習模組後提交專案，前三名將於 ISTELive 26（2026 年 6 月）全球舞台發表。適合對 AI 倫理與社會應用感興趣的學生。",
     "schedule": "提交截止：2026/3/13；得獎宣布：2026 年 4 月；ISTELive 發表：6 月",
     "deadline": "2026/3/13（本屆已截止，下屆注意官網）",
     "url": "https://iste-ascd.org/ai-innovator",
-    "tags": ["AI倫理", "社會應用", "教育科技", "K-12", "線上參賽"],
+    "tags": [
+      "AI倫理",
+      "社會應用",
+      "教育科技",
+      "K-12",
+      "線上參賽"
+    ],
     "highlight": false,
     "status": "已截止",
     "updated": "2026-03"
@@ -211,14 +360,28 @@
     "id": 205,
     "name": "Wix Creators of Tomorrow Challenge 2026",
     "scope": "國際",
-    "domains": ["視覺藝術", "語文/文學", "社會議題", "科技"],
-    "level": ["國中", "高中"],
+    "domains": [
+      "視覺藝術",
+      "語文/文學",
+      "社會議題",
+      "科技"
+    ],
+    "level": [
+      "國中",
+      "高中"
+    ],
     "organizer": "Wix.com",
     "description": "以 Wix 平台建立網站，主題緊扣 17 項聯合國 SDGs，評審重點為永續概念、設計質感與論述清晰度。入圍者可獲 Wix 專家一對一 5 週輔導，最終前三名在全球舞台展示。完全免費，適合具設計感或文字能力的學生。",
     "schedule": "提交截止：2026/3/8；準決賽輔導：3–4 月；決賽：2026 年上半年",
     "deadline": "2026/3/8（本屆已截止，下屆注意 wix.com/tomorrow）",
     "url": "https://www.wix.com/tomorrow",
-    "tags": ["網頁設計", "SDGs", "永續", "視覺設計", "語文表達"],
+    "tags": [
+      "網頁設計",
+      "SDGs",
+      "永續",
+      "視覺設計",
+      "語文表達"
+    ],
     "highlight": true,
     "status": "已截止",
     "updated": "2026-03"
@@ -227,14 +390,26 @@
     "id": 206,
     "name": "QS AI for ImpACT Challenge",
     "scope": "國際",
-    "domains": ["跨域創新", "AI工具應用", "社會議題"],
-    "level": ["高中"],
+    "domains": [
+      "跨域創新",
+      "AI工具應用",
+      "社會議題"
+    ],
+    "level": [
+      "高中"
+    ],
     "organizer": "QS ImpACT（英國 QS 集團）",
     "description": "聚焦 AI 如何解決聯合國 SDGs 議題，學生提出方案或原型，強調社會影響力與負責任 AI 倫理。提供獎學金、全球展示機會，適合有跨領域思維的高中生。",
     "schedule": "每年滾動開放，請關注 qsimpact.org",
     "deadline": "請關注官方網站",
     "url": "https://qsimpact.org/ai-for-impact-challenge/",
-    "tags": ["AI倫理", "SDGs", "社會影響力", "獎學金", "跨領域"],
+    "tags": [
+      "AI倫理",
+      "SDGs",
+      "社會影響力",
+      "獎學金",
+      "跨領域"
+    ],
     "highlight": false,
     "status": "開放中",
     "updated": "2026-03"
@@ -243,14 +418,25 @@
     "id": 207,
     "name": "Regeneron ISEF 2026",
     "scope": "國際",
-    "domains": ["科學研究", "STEM"],
-    "level": ["高中"],
+    "domains": [
+      "科學研究",
+      "STEM"
+    ],
+    "level": [
+      "高中"
+    ],
     "organizer": "Society for Science（美國）",
     "description": "全球最大高中 STEM 研究競賽，2026 年 5 月 9–15 日於美國鳳凰城舉行。台灣學生須先通過 TISF（臺灣國際科展）取得代表資格。AI、行為科學、社會學等均可報名，獎金逾 900 萬美元。",
     "schedule": "2026/5/9–15，美國鳳凰城",
     "deadline": "台灣選拔：每年 10 月報名 TISF",
     "url": "https://www.societyforscience.org/isef/",
-    "tags": ["STEM", "科學研究", "獎學金", "國際", "高中"],
+    "tags": [
+      "STEM",
+      "科學研究",
+      "獎學金",
+      "國際",
+      "高中"
+    ],
     "highlight": true,
     "status": "報名中",
     "updated": "2026-03"
@@ -259,14 +445,26 @@
     "id": 208,
     "name": "Google Science Fair",
     "scope": "國際",
-    "domains": ["科學研究", "跨域創新", "社會議題"],
-    "level": ["國中", "高中"],
+    "domains": [
+      "科學研究",
+      "跨域創新",
+      "社會議題"
+    ],
+    "level": [
+      "國中",
+      "高中"
+    ],
     "organizer": "Google",
     "description": "Google 舉辦的線上全球科學競賽（13–18 歲），鼓勵學生針對社會問題提出科學解決方案，近年含 AI 應用與資料科學主題。",
     "schedule": "通常每年上半年開放（請關注官方公告）",
     "deadline": "請關注 sciencefair.withgoogle.com",
     "url": "https://sciencefair.withgoogle.com/",
-    "tags": ["科學研究", "社會議題", "Google", "13-18歲"],
+    "tags": [
+      "科學研究",
+      "社會議題",
+      "Google",
+      "13-18歲"
+    ],
     "highlight": false,
     "status": "即將開放",
     "updated": "2026-03"
@@ -275,14 +473,25 @@
     "id": 209,
     "name": "WRO 世界機器人奧林匹亞",
     "scope": "國際",
-    "domains": ["科技", "跨域創新"],
-    "level": ["國中", "高中"],
+    "domains": [
+      "科技",
+      "跨域創新"
+    ],
+    "level": [
+      "國中",
+      "高中"
+    ],
     "organizer": "WRO Association / 中華民國電腦技能基金會（台灣）",
     "description": "全球 85 國以上，設常規賽、開放創意賽（含 AI 主題）、RoboMission 等組別。台灣每年辦理選拔，優秀隊伍前往世界總決賽（每年 11 月）。",
     "schedule": "台灣選拔賽：6–8 月；世界賽：11 月",
     "deadline": "台灣選拔約 4–5 月報名",
     "url": "https://wro-association.org/",
-    "tags": ["機器人", "程式設計", "STEM", "國際"],
+    "tags": [
+      "機器人",
+      "程式設計",
+      "STEM",
+      "國際"
+    ],
     "highlight": false,
     "status": "即將開放",
     "updated": "2026-03"
@@ -291,16 +500,340 @@
     "id": 210,
     "name": "FIRST LEGO League（FLL）",
     "scope": "國際",
-    "domains": ["科技", "跨域創新", "社會議題"],
-    "level": ["國中"],
+    "domains": [
+      "科技",
+      "跨域創新",
+      "社會議題"
+    ],
+    "level": [
+      "國中"
+    ],
     "organizer": "FIRST / LEGO Education",
     "description": "9–16 歲參加，以 LEGO Spike Prime 機器人作任務，同時針對年度主題（如 AI、永續、健康等）提出社會研究與解決方案，兼顧技術與核心價值評審。",
     "schedule": "賽季：每年 9 月至隔年 2 月；台灣賽：12 月–1 月",
     "deadline": "通常 9–10 月報名",
     "url": "https://www.firstlegoleague.org/",
-    "tags": ["LEGO", "機器人", "社會研究", "國中", "核心價值"],
+    "tags": [
+      "LEGO",
+      "機器人",
+      "社會研究",
+      "國中",
+      "核心價值"
+    ],
     "highlight": false,
     "status": "即將開放",
     "updated": "2026-03"
+  },
+  {
+    "id": 211,
+    "name": "Science Olympiad",
+    "scope": "國際",
+    "domains": [
+      "科學研究",
+      "STEM",
+      "跨域創新"
+    ],
+    "level": [
+      "國中",
+      "高中"
+    ],
+    "organizer": "Science Olympiad Inc.（美國）",
+    "description": "美國最具規模的 STEM 學術競賽，每年 7,800 支隊伍參賽，涵蓋生物、化學、物理、地球科學、工程等 23 項賽事。國中為 Division B、高中為 Division C，各校組 15 人團隊，像運動會般跨學科競技。台灣學生可組國際隊報名。",
+    "schedule": "每年 9 月開放報名；各區初賽：1–3 月；全國總決賽：5 月",
+    "deadline": "請關注官方網站，通常 10–11 月截止報名",
+    "url": "https://www.soinc.org/",
+    "tags": [
+      "STEM",
+      "科學",
+      "團隊競技",
+      "跨學科",
+      "美國"
+    ],
+    "highlight": true,
+    "status": "報名中",
+    "updated": "2026-04"
+  },
+  {
+    "id": 212,
+    "name": "Future Problem Solving Program International（FPSPI）",
+    "scope": "國際",
+    "domains": [
+      "跨域創新",
+      "社會議題",
+      "語文/文學"
+    ],
+    "level": [
+      "國中",
+      "高中"
+    ],
+    "organizer": "Future Problem Solving Program International",
+    "description": "全球 K-12 學生參與的未來問題解決計畫，訓練學生用六步驟問題解決流程分析全球議題並提出行動方案。設有 Global Issues（全球議題研究）、Community Projects（社區行動）、Creative Writing（創意寫作）、Storytelling（敘事表演）四大類別，適合各種能力的學生。",
+    "schedule": "每年 9 月開放；區域賽：1–3 月；國際賽：5–6 月",
+    "deadline": "通常每年 10 月報名",
+    "url": "https://www.fpspi.org/",
+    "tags": [
+      "未來思維",
+      "問題解決",
+      "創意寫作",
+      "社會議題",
+      "國際"
+    ],
+    "highlight": true,
+    "status": "報名中",
+    "updated": "2026-04"
+  },
+  {
+    "id": 213,
+    "name": "eCYBERMISSION（虛擬 STEM 競賽）",
+    "scope": "國際",
+    "domains": [
+      "科學研究",
+      "STEM",
+      "社會議題"
+    ],
+    "level": [
+      "國中"
+    ],
+    "organizer": "美國陸軍教育推廣計畫 / NSTA",
+    "description": "免費的線上 STEM 競賽，適合 6–9 年級（相當於國中）學生。2–4 人組隊，選定社區問題後用科學或工程方法解決，沿途記錄研究歷程。設州級、區域級、全國三級競賽，獲勝隊伍可獲美國儲蓄債券獎勵，全程免費且提供 STEM 導師支援。",
+    "schedule": "每年 9 月開放報名；初賽截止：隔年 1 月；全國決賽：春季",
+    "deadline": "通常每年 1 月截止",
+    "url": "https://www.ecybermission.com/",
+    "tags": [
+      "免費",
+      "社區問題",
+      "STEM",
+      "線上參賽",
+      "國中"
+    ],
+    "highlight": false,
+    "status": "即將開放",
+    "updated": "2026-04"
+  },
+  {
+    "id": 214,
+    "name": "Broadcom MASTERS（中學科學技術工程數學獎）",
+    "scope": "國際",
+    "domains": [
+      "科學研究",
+      "STEM"
+    ],
+    "level": [
+      "國中"
+    ],
+    "organizer": "Society for Science（美國）",
+    "description": "美國最具聲望的中學生（6–8 年級）STEM 競賽，從各地區科展優勝者中選出頂尖學生角逐全國獎項，最高可獲 25,000 美元獎學金。台灣學生需先通過本地科展取得資格，再申請國際參賽管道。",
+    "schedule": "每年 5–6 月報名；決賽：秋季（通常 10 月）",
+    "deadline": "通常每年 6 月截止報名",
+    "url": "https://www.societyforscience.org/broadcom-masters/",
+    "tags": [
+      "科學研究",
+      "STEM",
+      "獎學金",
+      "國中",
+      "美國"
+    ],
+    "highlight": false,
+    "status": "即將開放",
+    "updated": "2026-04"
+  },
+  {
+    "id": 215,
+    "name": "American Rocketry Challenge（TARC）",
+    "scope": "國際",
+    "domains": [
+      "科技",
+      "STEM"
+    ],
+    "level": [
+      "國中",
+      "高中"
+    ],
+    "organizer": "Aerospace Industries Association / National Association of Rocketry",
+    "description": "全球最大的火箭競賽，每年近 5,000 名學生參加。學生設計、建造並發射模型火箭，要求達到精確的飛行高度與時間目標，培養工程設計能力。設有 Team America Rocketry Challenge，美國本地競賽優勝可代表前往國際舞台。",
+    "schedule": "每年 10 月開放報名；資格賽：春季；全國決賽：5 月",
+    "deadline": "通常每年 12 月截止報名",
+    "url": "https://www.rocketcontest.org/",
+    "tags": [
+      "火箭",
+      "航太",
+      "工程設計",
+      "STEM",
+      "國際"
+    ],
+    "highlight": false,
+    "status": "即將開放",
+    "updated": "2026-04"
+  },
+  {
+    "id": 216,
+    "name": "National Science Bowl（美國能源部全國科學碗）",
+    "scope": "國際",
+    "domains": [
+      "科學研究",
+      "STEM"
+    ],
+    "level": [
+      "國中",
+      "高中"
+    ],
+    "organizer": "美國能源部（DOE）",
+    "description": "美國能源部主辦的快問快答式科學競賽，涵蓋生物、化學、地球科學、物理、能源與數學，分國中組與高中組。每年超過 9,000 名高中生與 4,500 名國中生參與地區賽。台灣學生可透過 DOE 國際合作計畫了解參賽資格。",
+    "schedule": "地區賽：每年 1–2 月；全國決賽：4–5 月（華盛頓DC）",
+    "deadline": "通常每年 11 月報名",
+    "url": "https://science.osti.gov/wdts/nsb",
+    "tags": [
+      "科學競賽",
+      "快問快答",
+      "STEM",
+      "美國",
+      "物理化學"
+    ],
+    "highlight": false,
+    "status": "即將開放",
+    "updated": "2026-04"
+  },
+  {
+    "id": 217,
+    "name": "ASA Statistics Project Competition（統計專題競賽）",
+    "scope": "國際",
+    "domains": [
+      "數學",
+      "科學研究",
+      "STEM"
+    ],
+    "level": [
+      "國中",
+      "高中"
+    ],
+    "organizer": "美國統計學會（ASA）",
+    "description": "美國統計學會主辦，學生運用真實數據設計統計研究專題，從資料蒐集、分析到結論報告一手包辦。分國中組與高中組，線上提交作品，是少見的「資料科學入門」競賽，與 AI、機器學習學習路徑高度相關。",
+    "schedule": "每年 3–11 月開放作品提交；結果公布：隔年 3 月",
+    "deadline": "通常每年 11 月截止",
+    "url": "https://www.amstat.org/asa/education/statistics-project-competition.aspx",
+    "tags": [
+      "統計",
+      "數據分析",
+      "數學",
+      "STEM",
+      "線上參賽"
+    ],
+    "highlight": false,
+    "status": "報名中",
+    "updated": "2026-04"
+  },
+  {
+    "id": 218,
+    "name": "ASA Data Visualization Poster Competition（數據視覺化海報競賽）",
+    "scope": "國際",
+    "domains": [
+      "數學",
+      "視覺藝術",
+      "STEM"
+    ],
+    "level": [
+      "國中",
+      "高中"
+    ],
+    "organizer": "美國統計學會（ASA）",
+    "description": "學生蒐集真實數據並設計海報進行視覺化呈現，結合數學與設計能力。分國小、國中、高中三組，線上提交，完全免費。是「數據 × 視覺設計」跨領域的優質入門競賽，作品可作為學習歷程的有力佐證。",
+    "schedule": "每年 4–11 月開放提交；結果公布：隔年 3 月",
+    "deadline": "通常每年 11 月截止",
+    "url": "https://www.amstat.org/asa/education/poster-and-project-competitions.aspx",
+    "tags": [
+      "數據視覺化",
+      "海報設計",
+      "統計",
+      "數學",
+      "跨領域"
+    ],
+    "highlight": false,
+    "status": "報名中",
+    "updated": "2026-04"
+  },
+  {
+    "id": 219,
+    "name": "American Computer Science League（ACSL）",
+    "scope": "國際",
+    "domains": [
+      "AI工具應用",
+      "科技",
+      "STEM"
+    ],
+    "level": [
+      "國中",
+      "高中"
+    ],
+    "organizer": "American Computer Science League",
+    "description": "美國歷史最悠久的中學電腦科學競賽（創立於 1978 年），每年舉辦四輪線上筆試，涵蓋演算法、布林代數、字串處理、電腦數學等主題，最後一輪為程式設計賽。分 All-Star、Platinum、Gold、Silver、Bronze、Junior 六個組別，適合各程度學生，台灣學校可直接報名。",
+    "schedule": "每年 10 月開始，共四輪（約每兩個月一輪）；全年賽季",
+    "deadline": "通常 10 月開放報名",
+    "url": "https://www.acsl.org/",
+    "tags": [
+      "電腦科學",
+      "演算法",
+      "程式設計",
+      "國際",
+      "線上參賽"
+    ],
+    "highlight": true,
+    "status": "即將開放",
+    "updated": "2026-04"
+  },
+  {
+    "id": 220,
+    "name": "VEX Robotics Competition（VRC 機器人競賽）",
+    "scope": "國際",
+    "domains": [
+      "科技",
+      "STEM",
+      "跨域創新"
+    ],
+    "level": [
+      "國中",
+      "高中"
+    ],
+    "organizer": "REC Foundation / VEX Robotics",
+    "description": "全球最大的國中高中機器人競賽，超過 40 個國家 18,000 支以上隊伍參加。使用 VEX 套件設計並控制機器人完成年度主題任務，強調工程設計、程式設計與團隊合作。台灣每年有在地選拔賽，獲獎隊伍可晉升世界錦標賽。",
+    "schedule": "賽季：每年 5 月至隔年 4 月；台灣地區賽：10–2 月；世界錦標賽：4–5 月",
+    "deadline": "通常 9–10 月報名",
+    "url": "https://vrc-kb.recf.org/",
+    "tags": [
+      "機器人",
+      "VEX",
+      "工程設計",
+      "程式設計",
+      "國際"
+    ],
+    "highlight": true,
+    "status": "報名中",
+    "updated": "2026-04"
+  },
+  {
+    "id": 221,
+    "name": "Desafiando el Riesgo（風險數學競賽）",
+    "scope": "國際",
+    "domains": [
+      "數學",
+      "STEM"
+    ],
+    "level": [
+      "高中"
+    ],
+    "organizer": "Organization of Latino Actuaries（OLA）/ Actuarial Foundation",
+    "description": "由拉丁美洲精算師協會主辦，面向美國及國際高中生的數學個案競賽，以風險管理與精算數學為核心。學生分析真實情境問題，提出數學模型解決方案，並全程以西班牙文進行（可讓學生同時展現語文與數學能力）。",
+    "schedule": "每年 9 月開放報名；截止：12 月；決賽：春季",
+    "deadline": "通常每年 12 月截止",
+    "url": "https://www.actuarialfoundation.org/programs/high-school/desafiando-el-riesgo/",
+    "tags": [
+      "數學",
+      "精算",
+      "風險管理",
+      "西班牙文",
+      "跨語言"
+    ],
+    "highlight": false,
+    "status": "即將開放",
+    "updated": "2026-04"
   }
 ]
