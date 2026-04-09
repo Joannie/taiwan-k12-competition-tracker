@@ -225,7 +225,7 @@ taiwan-k12-competition-tracker/
 
 歡迎透過以下方式貢獻：
 
-1. **GitHub Issues**（推薦）：[點此開 Issue](../../issues/new)  
+1. **GitHub Issues**（推薦）：[點此開 Issue](https://github.com/joannie/taiwan-k12-competition-tracker/issues/new)  
    請包含：競賽名稱、官方連結、適合學段、截止日期
 
 2. **Pull Request**：直接修改 `competitions.json`，送出 PR
