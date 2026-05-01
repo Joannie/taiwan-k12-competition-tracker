@@ -12,7 +12,7 @@
 
 | ID  | 競賽名稱 | 官方網址 |
 |-----|---------|---------|
-| 101 | 數感盃：AI 共創新詩圖文競賽 | https://ai-award.numeracylab.com/ |
+| 101 | ~~數感盃：AI 共創新詩圖文競賽~~ *(移除於 2026-05)* | https://ai-award.numeracylab.com/ |
 | 102 | 全國高中職生成式 AI 創意競賽 | https://dcsie.gm.cute.edu.tw |
 | 103 | 育秀盃創意獎（高中 AI 應用競賽） | https://award.ysed.org.tw/competition/80/1 |
 | 104 | 全國科技教育創意實作競賽 | https://technology.chc.edu.tw/ |
@@ -21,6 +21,22 @@
 | 107 | WMI 世界數學邀請賽（台灣選拔賽） | https://www.vipolpcs.com |
 | 108 | 2026 START！AI 智慧小車全國競賽（第七屆） | https://sites.google.com/a/go.pymhs.tyc.edu.tw/startlearning/ |
 | 109 | 全國創意與智慧科技競賽 2026 | https://www.cacet.org/web/2026creation/index.html |
+
+| 110 | TRML 台灣區高中數學競賽（第28屆） | https://www.99cef.org.tw/trml-s/ |
+
+| 111 | TRML 國中數學競賽（原JHMC，第24屆） | https://www.99cef.org.tw/trml-j/ |
+
+| 112 | 2026 TISDC 臺灣國際學生創意設計大賽 | https://www.tisdc.org/ |
+
+| 113 | 115學年度全國學生美術比賽 | https://web.arte.gov.tw/nsac/ |
+
+| 114 | 115學年度全國高級中等學校英文作文及英語演講比賽 | https://shs.k12ea.gov.tw/site/english |
+
+| 115 | CodeQuest 2026 台灣預選賽（夏季賽） | https://ai4kids.ai/en/pages/codecombat-codequest |
+
+| 116 | 2026 葉總繪盃全國高中職電腦繪圖競賽 | https://cg.dyu.edu.tw/ |
+
+| 224 | IMC 國際數學競賽（International Mathematics Competition）台灣選拔賽 2026 | https://imcct.net/ |
 
 ## 國際競賽（ID 200–299）
 
@@ -48,12 +64,16 @@
 | 220 | VEX Robotics Competition（VRC 機器人競賽） | https://vrc-kb.recf.org/ |
 | 221 | Desafiando el Riesgo（風險數學競賽） | https://www.actuarialfoundation.org/programs/high-school/desafiando-el-riesgo/ |
 
+| 222 | 2026 TISDC 臺灣國際學生創意設計大賽（國際組） | https://www.tisdc.org/ |
+
+| 223 | CodeQuest Global（全球總決賽）2026 | https://ai4kids.ai/en/pages/codecombat-codequest |
+
 ---
 
 ## 下一個可用 ID
 
-- 國內新競賽：從 **110** 開始
-- 國際新競賽：從 **222** 開始
+- 國內新競賽：從 **118** 開始
+- 國際新競賽：從 **224** 開始
 
 ---
 
@@ -63,3 +83,4 @@
 |------|-----------|---------|
 | 2026-03 | 台灣國中高中科技AI創意競賽、跨領域國際競賽 | 19 筆（初始版本）|
 | 2026-04 | competitionsciences.org 13–18歲國際競賽 URL驗證 | 11 筆（國際）|
+| 2026-05 | 2026 下半年–2027 跨領域 | 10 筆 |
