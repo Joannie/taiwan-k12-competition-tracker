@@ -2,16 +2,17 @@
 
 ## 專案資訊
 
-- **本機路徑：** `D:\Projects\taiwan-k12-competition-tracker`
-- **GitHub Repo：** `https://github.com/joannie/taiwan-k12-competition-tracker`
-- **線上網站：** `https://joannie.github.io/taiwan-k12-competition-tracker/`
+- **GitHub Repo：** 請至 GitHub repo 的 Settings → Pages 確認網址
+- **線上網站：** 請至 GitHub repo 的 Settings → Pages 確認網址
+
+> 本檔案（CLAUDE.md）已加入 .gitignore，不會上傳到 GitHub。
 
 ---
 
 ## 專案結構
 
 ```
-D:\Projects\taiwan-k12-competition-tracker\
+[專案根目錄]\
 ├── competitions.json    ← 所有競賽資料（唯一需要維護的資料檔）
 ├── tracked.md           ← 已收錄清單（防止重複，自動維護）
 ├── index.html           ← 網站主體（資料透過 sync.py 內嵌，不要手動改）
@@ -127,7 +128,7 @@ git push
    新增：N 筆競賽
    目前總數：XX 筆
    網站更新：約 1 分鐘後生效
-   網址：https://joannie.github.io/taiwan-k12-competition-tracker/
+   網址：請至 GitHub Pages 確認（Settings → Pages）
 ```
 
 ---

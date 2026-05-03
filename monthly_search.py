@@ -234,7 +234,7 @@ def get_next_ids() -> tuple[int, int]:
 def search_competitions(tracked_names: list[str],
                         next_domestic: int,
                         next_intl: int) -> list[dict]:
-    """呼叫 Claude API 搜尋新競賽，回傳 list[dict]"""
+    """呼叫 Claude API 搜尋新競賽，含自動重試機制（Rate Limit 保護）"""
 
     api_key = os.environ.get("ANTHROPIC_API_KEY", "")
     if not api_key:
@@ -243,79 +243,79 @@ def search_competitions(tracked_names: list[str],
 
     try:
         import anthropic
+        import time as time_module
     except ImportError:
         print("❌ 找不到 anthropic 套件，請執行：pip install anthropic")
         sys.exit(1)
 
-    tracked_list = "\n".join(f"- {n}" for n in tracked_names) or "（目前無已收錄競賽）"
-    domains_str  = "、".join(SEARCH_DOMAINS)
-    levels_str   = "、".join(SEARCH_LEVELS)
+    domains_str = "、".join(SEARCH_DOMAINS)
+    levels_str  = "、".join(SEARCH_LEVELS)
 
-    prompt = f"""你是一位台灣教育資源研究員，專門整理適合中學生參加的競賽。
+    # ── 縮短 tracked_list，避免超過 Rate Limit ────────────────────────────
+    # 只取每個名稱前 15 字，用逗號分隔，大幅降低 prompt token 數
+    short_names  = [n[:15] for n in tracked_names]
+    tracked_list = "、".join(short_names) if short_names else "無"
 
-今天是 {TODAY_DT.strftime("%Y年%m月%d日")}。
-
-## 已收錄競賽（請完全排除，不要重複回傳）
-{tracked_list}
-
-## 搜尋任務
-找出 {SEARCH_YEAR} 年下半年到 {SEARCH_YEAR + 1} 年，
-適合台灣 {levels_str} 參加的新競賽。
-
-涵蓋領域：{domains_str}
-
-目標：找 {SEARCH_TARGET_COUNT} 筆左右真實存在的新競賽。
-
-## 嚴格規定
-- 只回傳 JSON 陣列，不要任何說明文字或 markdown 代碼區塊
-- 每筆必須有真實可訪問的官方網址（不可虛構）
-- 排除已收錄清單中的所有競賽（名稱相似的也要排除）
-- 國內競賽 ID 從 {next_domestic} 開始
-- 國際競賽 ID 從 {next_intl} 開始
-- deadline 欄位請盡量用 YYYY/MM/DD 格式（系統用來判斷是否過期）
-
-## JSON 格式
-[
-  {{
-    "id": {next_domestic},
-    "name": "競賽完整名稱",
-    "scope": "國內",
-    "domains": ["AI工具應用"],
-    "level": ["國中", "高中"],
-    "organizer": "主辦單位",
-    "description": "競賽說明（50–150字）",
-    "schedule": "時程說明",
-    "deadline": "2026/08/31",
-    "url": "https://官方網站",
-    "tags": ["標籤1", "標籤2"],
-    "highlight": false,
-    "status": "即將開放",
-    "updated": "{TODAY}"
-  }}
-]
-
-scope  只能填：「國內」/「國內（接軌國際）」/「國際」
-domains 只能從以下選：{domains_str}
-level  只能填：「國中」/「高中」
-status 只能填：「報名中」/「開放中」/「即將開放」/「已截止」
-
-只輸出 JSON 陣列，從 [ 開始，到 ] 結束。"""
-
-    print(f"   使用模型：{CLAUDE_MODEL}，搜尋目標：{SEARCH_TARGET_COUNT} 筆")
-
-    client  = anthropic.Anthropic(api_key=api_key)
-    message = client.messages.create(
-        model=CLAUDE_MODEL,
-        max_tokens=CLAUDE_MAX_TOKENS,
-        tools=[{"type": "web_search_20250305", "name": "web_search"}],
-        messages=[{"role": "user", "content": prompt}]
+    # ── 精簡版 prompt（token 數比原版少 60%）─────────────────────────────
+    prompt = (
+        f"搜尋 {SEARCH_YEAR} 年下半年至 {SEARCH_YEAR+1} 年，"
+        f"適合台灣國中高中（13–18歲）的新競賽。\n"
+        f"領域：{domains_str}\n"
+        f"排除已收錄（勿重複）：{tracked_list}\n\n"
+        f"找 {SEARCH_TARGET_COUNT} 筆，只回傳 JSON 陣列，格式如下：\n"
+        f'''[{{"id":{next_domestic},"name":"名稱","scope":"國內","domains":["AI工具應用"],'''
+        f'''"level":["國中","高中"],"organizer":"主辦","description":"說明50-100字",'''
+        f'''"schedule":"時程","deadline":"YYYY/MM/DD","url":"https://官方網址",'''
+        f'''"tags":["標籤"],"highlight":false,"status":"即將開放","updated":"{TODAY}"}}]\n'''
+        f"scope: 國內/國內（接軌國際）/國際  "
+        f"status: 報名中/開放中/即將開放/已截止\n"
+        f"國內ID從{next_domestic}，國際ID從{next_intl}\n"
+        f"只輸出JSON陣列，從[開始到]結束。"
     )
+
+    print(f"   模型：{CLAUDE_MODEL} | 搜尋目標：{SEARCH_TARGET_COUNT} 筆")
+    print(f"   Prompt 長度：約 {len(prompt)} 字元（已精簡）")
+
+    client = anthropic.Anthropic(api_key=api_key)
+
+    # ── 自動重試（遇到 Rate Limit 等待後重試）────────────────────────────
+    max_retries = 3
+    message = None
+    for attempt in range(1, max_retries + 1):
+        try:
+            print(f"   第 {attempt} 次呼叫 API...")
+            message = client.messages.create(
+                model=CLAUDE_MODEL,
+                max_tokens=CLAUDE_MAX_TOKENS,
+                tools=[{"type": "web_search_20250305", "name": "web_search"}],
+                messages=[{"role": "user", "content": prompt}]
+            )
+            print("   ✅ API 呼叫成功")
+            break
+
+        except anthropic.RateLimitError:
+            wait_sec = 60 * attempt  # 60s → 120s → 180s
+            if attempt == max_retries:
+                print("❌ 達到最大重試次數，本月搜尋略過。")
+                return []
+            print(f"   ⚠️  Rate Limit，等待 {wait_sec} 秒後重試（{attempt}/{max_retries}）...")
+            time_module.sleep(wait_sec)
+
+        except Exception as e:
+            print(f"❌ API 呼叫失敗：{type(e).__name__}: {e}")
+            return []
+
+    if message is None:
+        return []
 
     raw = "".join(block.text for block in message.content if block.type == "text")
     print(f"   API 回應長度：{len(raw)} 字元")
 
     # 解析 JSON
-    for target in [raw.strip(), (re.search(r"\[[\s\S]*\]", raw) or type("", (), {"group": lambda s, x: None})()).group(0)]:
+    for target in [raw.strip(), None]:
+        if target is None:
+            m = re.search(r'\['+ r'[\s\S]*' + r'\]', raw)
+            target = m.group(0) if m else None
         if not target:
             continue
         try:
@@ -326,6 +326,7 @@ status 只能填：「報名中」/「開放中」/「即將開放」/「已截�
     print("❌ 無法解析 API 回應為 JSON")
     print(f"   原始內容（前 500 字）：{raw[:500]}")
     return []
+
 
 
 def deduplicate(new_items: list[dict], tracked_names: list[str]) -> list[dict]:
