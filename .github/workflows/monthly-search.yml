@@ -17,6 +17,7 @@ on:
 permissions:
   contents: write
   pull-requests: write
+  issues: write
 
 jobs:
   search-and-update:
@@ -48,34 +49,36 @@ jobs:
         run: |
           python3 monthly_search.py
 
-      # 5. 讀取新增筆數
+      # 5. 讀取變更筆數
       - name: 📊 讀取搜尋結果
         id: check_results
         run: |
-          COUNT=$(cat new_count.txt 2>/dev/null || echo "0")
-          echo "new_count=$COUNT" >> $GITHUB_OUTPUT
-          echo "本次新增競賽：$COUNT 筆"
+          CHANGES=$(cat change_count.txt 2>/dev/null || echo "0")
+          NEW=$(cat new_count.txt 2>/dev/null || echo "0")
+          REMOVED=$(cat removed_count.txt 2>/dev/null || echo "0")
+          echo "change_count=$CHANGES" >> $GITHUB_OUTPUT
+          echo "new_count=$NEW" >> $GITHUB_OUTPUT
+          echo "removed_count=$REMOVED" >> $GITHUB_OUTPUT
+          echo "新增：$NEW 筆 | 移除：$REMOVED 筆"
 
-      # 6. 如果有新競賽，建立 Pull Request
+      # 6. 如果有變更，建立 Pull Request
       - name: 📬 建立 Pull Request
-        if: steps.check_results.outputs.new_count != '0'
-        uses: peter-evans/create-pull-request@v6
+        if: steps.check_results.outputs.change_count != '0'
+        uses: peter-evans/create-pull-request@v7
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          commit-message: |
-            🤖 每月自動更新：新增 ${{ steps.check_results.outputs.new_count }} 筆競賽
+          commit-message: "🤖 每月自動更新：新增 ${{ steps.check_results.outputs.new_count }} 筆，移除 ${{ steps.check_results.outputs.removed_count }} 筆"
           branch: auto-update/monthly-${{ github.run_number }}
           delete-branch: true
-          title: |
-            🔍 每月自動更新：新增 ${{ steps.check_results.outputs.new_count }} 筆競賽
+          title: "🔍 每月自動更新：新增 ${{ steps.check_results.outputs.new_count }} 筆，移除 ${{ steps.check_results.outputs.removed_count }} 筆"
           body-path: pr_body.txt
           labels: |
             auto-update
             needs-review
 
-      # 7. 如果沒有新競賽，建立通知 Issue
-      - name: 📭 無新競賽通知
-        if: steps.check_results.outputs.new_count == '0'
+      # 7. 如果沒有任何變更，建立通知 Issue
+      - name: 📭 無變更通知
+        if: steps.check_results.outputs.change_count == '0'
         uses: actions/github-script@v7
         with:
           script: |
@@ -86,7 +89,6 @@ jobs:
               state: 'open'
             });
 
-            // 關閉上個月的舊通知
             for (const issue of issues) {
               await github.rest.issues.update({
                 owner: context.repo.owner,
@@ -96,11 +98,10 @@ jobs:
               });
             }
 
-            // 建立新通知
             await github.rest.issues.create({
               owner: context.repo.owner,
               repo: context.repo.repo,
               title: `📭 ${new Date().toISOString().slice(0,7)} 每月搜尋：本月無新競賽`,
-              body: `## 每月自動搜尋結果\n\n本月搜尋未發現尚未收錄的新競賽。\n\n如有遺漏，可手動新增或重新觸發搜尋。\n\n> 自動關閉於下個月搜尋完成後。`,
+              body: `## 每月自動搜尋結果\n\n本月搜尋未發現尚未收錄的新競賽，也無過期競賽需要移除。\n\n如有遺漏，可手動新增或重新觸發搜尋。\n\n> 自動關閉於下個月搜尋完成後。`,
               labels: ['monthly-report']
             });
