@@ -4,17 +4,10 @@ on:
   schedule:
     - cron: '0 1 1 * *'
   workflow_dispatch:
-    inputs:
-      dry_run:
-        description: '模擬執行（不實際修改檔案）'
-        required: false
-        default: 'false'
-        type: boolean
 
 permissions:
   contents: write
   pull-requests: write
-  issues: write
 
 jobs:
   search-and-update:
@@ -51,7 +44,6 @@ jobs:
           echo "removed_count=$REMOVED" >> $GITHUB_OUTPUT
           echo "新增：$NEW 筆 | 移除：$REMOVED 筆"
 
-      # 有變更 → 建立 Pull Request
       - name: 📬 建立 Pull Request
         if: steps.check_results.outputs.change_count != '0'
         uses: peter-evans/create-pull-request@v7
@@ -66,14 +58,10 @@ jobs:
             auto-update
             needs-review
 
-      # 無變更 → 只在 Actions log 印出通知，不建立 Issue（避免權限問題）
-      - name: 📭 無變更通知
+      - name: 📭 無變更通知（印在 log）
         if: steps.check_results.outputs.change_count == '0'
         run: |
-          echo "============================================"
-          echo "📭 本月搜尋結果：無新競賽，也無過期競賽"
-          echo "============================================"
+          echo "========================================"
+          echo "📭 本月結果：無新競賽，也無過期競賽"
           echo "執行時間：$(date '+%Y-%m-%d %H:%M:%S')"
-          echo "下次執行：下個月 1 號"
-          echo "如需手動新增，請至 Claude.ai 搜尋後更新"
-          echo "============================================"
+          echo "========================================"
