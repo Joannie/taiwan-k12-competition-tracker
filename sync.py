@@ -20,6 +20,7 @@ sync.py — 將 competitions.json 同步進 index.html
 import json
 import re
 import sys
+from datetime import datetime
 from pathlib import Path
 
 BASE = Path(__file__).parent
@@ -76,6 +77,14 @@ def main():
     if count == 0:
         print("❌ 在 index.html 中找不到 EMBEDDED_DATA，請確認 index.html 格式正確。")
         sys.exit(1)
+
+    # ── 自動更新底部「最後更新」日期 ──────────────────────────────────────
+    now = datetime.now()
+    year = now.year
+    month = now.month
+    new_date_str = f"最後更新：{year} 年 {month} 月"
+    new_html = re.sub(r"最後更新：\d+ 年 \d+ 月", new_date_str, new_html)
+    print(f"   ✅ 已更新底部日期為「{new_date_str}」")
 
     # ── 寫回 HTML ──────────────────────────────────────────────────────────
     with open(HTML_FILE, "w", encoding="utf-8") as f:
