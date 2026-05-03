@@ -1,11 +1,8 @@
 name: 每月自動搜尋新競賽
 
 on:
-  # 每月 1 號 UTC 01:00（台灣時間早上 9:00）自動執行
   schedule:
     - cron: '0 1 1 * *'
-
-  # 也可以手動觸發（在 GitHub Actions 頁面點 Run workflow）
   workflow_dispatch:
     inputs:
       dry_run:
@@ -25,31 +22,24 @@ jobs:
     timeout-minutes: 15
 
     steps:
-      # 1. 取得程式碼
       - name: 📥 Checkout repository
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
-      # 2. 設定 Python 環境
       - name: 🐍 Setup Python
         uses: actions/setup-python@v5
         with:
           python-version: '3.11'
 
-      # 3. 安裝相依套件
       - name: 📦 Install dependencies
-        run: |
-          pip install anthropic
+        run: pip install anthropic
 
-      # 4. 執行每月搜尋腳本
       - name: 🔍 執行每月自動搜尋
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
-        run: |
-          python3 monthly_search.py
+        run: python3 monthly_search.py
 
-      # 5. 讀取變更筆數
       - name: 📊 讀取搜尋結果
         id: check_results
         run: |
@@ -61,7 +51,7 @@ jobs:
           echo "removed_count=$REMOVED" >> $GITHUB_OUTPUT
           echo "新增：$NEW 筆 | 移除：$REMOVED 筆"
 
-      # 6. 如果有變更，建立 Pull Request
+      # 有變更 → 建立 Pull Request
       - name: 📬 建立 Pull Request
         if: steps.check_results.outputs.change_count != '0'
         uses: peter-evans/create-pull-request@v7
@@ -76,32 +66,14 @@ jobs:
             auto-update
             needs-review
 
-      # 7. 如果沒有任何變更，建立通知 Issue
+      # 無變更 → 只在 Actions log 印出通知，不建立 Issue（避免權限問題）
       - name: 📭 無變更通知
         if: steps.check_results.outputs.change_count == '0'
-        uses: actions/github-script@v7
-        with:
-          script: |
-            const { data: issues } = await github.rest.issues.listForRepo({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              labels: 'monthly-report',
-              state: 'open'
-            });
-
-            for (const issue of issues) {
-              await github.rest.issues.update({
-                owner: context.repo.owner,
-                repo: context.repo.repo,
-                issue_number: issue.number,
-                state: 'closed'
-              });
-            }
-
-            await github.rest.issues.create({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              title: `📭 ${new Date().toISOString().slice(0,7)} 每月搜尋：本月無新競賽`,
-              body: `## 每月自動搜尋結果\n\n本月搜尋未發現尚未收錄的新競賽，也無過期競賽需要移除。\n\n如有遺漏，可手動新增或重新觸發搜尋。\n\n> 自動關閉於下個月搜尋完成後。`,
-              labels: ['monthly-report']
-            });
+        run: |
+          echo "============================================"
+          echo "📭 本月搜尋結果：無新競賽，也無過期競賽"
+          echo "============================================"
+          echo "執行時間：$(date '+%Y-%m-%d %H:%M:%S')"
+          echo "下次執行：下個月 1 號"
+          echo "如需手動新增，請至 Claude.ai 搜尋後更新"
+          echo "============================================"
