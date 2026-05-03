@@ -1,33 +1,5 @@
 [
   {
-    "id": 101,
-    "name": "數感盃：AI 共創新詩圖文競賽",
-    "scope": "國內",
-    "domains": [
-      "數學",
-      "語文/文學",
-      "AI工具應用"
-    ],
-    "level": [
-      "國中"
-    ],
-    "organizer": "數感實驗室",
-    "description": "以數學為靈感創作詩作，並用 AI 圖像生成工具（Gemini API）共創圖像，評審同時評估數學思維、文采與視覺效果。國七組單獨開放報名，是少見的「數學×文學×AI」三合一競賽。",
-    "schedule": "2025 年 12 月起開放創作；複審 2026/2/24；頒獎於 2026 年 3 月",
-    "deadline": "2026/1/23（已截止，下屆請關注官方公告）",
-    "url": "https://ai-award.numeracylab.com/",
-    "tags": [
-      "數學",
-      "文學",
-      "AI生成",
-      "詩",
-      "圖像"
-    ],
-    "highlight": true,
-    "status": "已截止",
-    "updated": "2026-03"
-  },
-  {
     "id": 102,
     "name": "全國高中職生成式 AI 創意競賽",
     "scope": "國內",
@@ -176,7 +148,7 @@
     "organizer": "中華數學協會",
     "description": "個人制數學競賽，覆蓋國小至高三，獲金銀銅獎者取得參加 7 月世界總決賽的資格。雖非 AI 競賽，但強調邏輯推理與計算思維，是 AI 學習路徑的重要數學基礎能力認證。",
     "schedule": "台灣選拔賽：每年 1 月；成績公布：2 月初；世界賽：7 月",
-    "deadline": "通常 11–12 月報名",
+    "deadline": "2026/02/01",
     "url": "https://www.vipolpcs.com",
     "tags": [
       "數學",
@@ -325,65 +297,6 @@
     ],
     "highlight": false,
     "status": "即將開放",
-    "updated": "2026-03"
-  },
-  {
-    "id": 204,
-    "name": "ISTE AI Innovator Challenge 2026",
-    "scope": "國際",
-    "domains": [
-      "AI工具應用",
-      "跨域創新",
-      "教育科技"
-    ],
-    "level": [
-      "國中",
-      "高中"
-    ],
-    "organizer": "ISTE + ASCD（國際教育科技學會）",
-    "description": "K-12 學生運用 AI 素養解決社區問題，設計 AI 創新方案。完成 15 個 Studio 學習模組後提交專案，前三名將於 ISTELive 26（2026 年 6 月）全球舞台發表。適合對 AI 倫理與社會應用感興趣的學生。",
-    "schedule": "提交截止：2026/3/13；得獎宣布：2026 年 4 月；ISTELive 發表：6 月",
-    "deadline": "2026/3/13（本屆已截止，下屆注意官網）",
-    "url": "https://iste-ascd.org/ai-innovator",
-    "tags": [
-      "AI倫理",
-      "社會應用",
-      "教育科技",
-      "K-12",
-      "線上參賽"
-    ],
-    "highlight": false,
-    "status": "已截止",
-    "updated": "2026-03"
-  },
-  {
-    "id": 205,
-    "name": "Wix Creators of Tomorrow Challenge 2026",
-    "scope": "國際",
-    "domains": [
-      "視覺藝術",
-      "語文/文學",
-      "社會議題",
-      "科技"
-    ],
-    "level": [
-      "國中",
-      "高中"
-    ],
-    "organizer": "Wix.com",
-    "description": "以 Wix 平台建立網站，主題緊扣 17 項聯合國 SDGs，評審重點為永續概念、設計質感與論述清晰度。入圍者可獲 Wix 專家一對一 5 週輔導，最終前三名在全球舞台展示。完全免費，適合具設計感或文字能力的學生。",
-    "schedule": "提交截止：2026/3/8；準決賽輔導：3–4 月；決賽：2026 年上半年",
-    "deadline": "2026/3/8（本屆已截止，下屆注意 wix.com/tomorrow）",
-    "url": "https://www.wix.com/tomorrow",
-    "tags": [
-      "網頁設計",
-      "SDGs",
-      "永續",
-      "視覺設計",
-      "語文表達"
-    ],
-    "highlight": true,
-    "status": "已截止",
     "updated": "2026-03"
   },
   {
