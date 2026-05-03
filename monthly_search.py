@@ -274,27 +274,33 @@ def search_competitions(tracked_names: list[str],
     )
 
     print(f"   模型：{CLAUDE_MODEL} | 搜尋目標：{SEARCH_TARGET_COUNT} 筆")
-    print(f"   Prompt 長度：約 {len(prompt)} 字元（已精簡）")
+    print(f"   Prompt 長度：約 {len(prompt)} 字元")
 
     client = anthropic.Anthropic(api_key=api_key)
+
+    # ── 先等 65 秒，讓 token bucket 重置，避免 Rate Limit ─────────────────
+    # Tier 1 限制：30,000 tokens/分鐘。等待後再送出，確保 bucket 是滿的。
+    print("   ⏳ 等待 65 秒讓 API rate limit 重置...")
+    time_module.sleep(65)
 
     # ── 自動重試（遇到 Rate Limit 等待後重試）────────────────────────────
     max_retries = 3
     message = None
     for attempt in range(1, max_retries + 1):
         try:
-            print(f"   第 {attempt} 次呼叫 API...")
+            print(f"   第 {attempt} 次呼叫 API（不使用 web_search 工具，節省 token）...")
             message = client.messages.create(
                 model=CLAUDE_MODEL,
                 max_tokens=CLAUDE_MAX_TOKENS,
-                tools=[{"type": "web_search_20250305", "name": "web_search"}],
+                # ⚠️ 不加 web_search 工具：工具 schema 本身就佔用大量 token
+                # Claude 會用訓練資料回答，適合找「常設型」競賽
                 messages=[{"role": "user", "content": prompt}]
             )
             print("   ✅ API 呼叫成功")
             break
 
         except anthropic.RateLimitError:
-            wait_sec = 60 * attempt  # 60s → 120s → 180s
+            wait_sec = 65 * attempt  # 65s → 130s → 195s
             if attempt == max_retries:
                 print("❌ 達到最大重試次數，本月搜尋略過。")
                 return []
