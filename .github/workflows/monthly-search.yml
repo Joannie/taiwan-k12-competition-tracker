@@ -15,7 +15,7 @@ jobs:
     timeout-minutes: 15
 
     steps:
-      - name: 📥 Checkout repository
+      - name: 📥 Checkout
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
@@ -33,7 +33,7 @@ jobs:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
         run: python3 monthly_search.py
 
-      - name: 📊 讀取搜尋結果
+      - name: 📊 讀取結果
         id: check_results
         run: |
           CHANGES=$(cat change_count.txt 2>/dev/null || echo "0")
@@ -54,14 +54,12 @@ jobs:
           delete-branch: true
           title: "🔍 每月自動更新：新增 ${{ steps.check_results.outputs.new_count }} 筆，移除 ${{ steps.check_results.outputs.removed_count }} 筆"
           body-path: pr_body.txt
-          labels: |
-            auto-update
-            needs-review
+          labels: auto-update
 
-      - name: 📭 無變更通知（印在 log）
+      - name: 📭 無變更（印 log）
         if: steps.check_results.outputs.change_count == '0'
         run: |
           echo "========================================"
-          echo "📭 本月結果：無新競賽，也無過期競賽"
-          echo "執行時間：$(date '+%Y-%m-%d %H:%M:%S')"
+          echo "📭 本月無新競賽，也無過期競賽需移除"
+          echo "執行時間：$(date '+%Y-%m-%d %H:%M')"
           echo "========================================"
