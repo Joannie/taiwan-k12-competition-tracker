@@ -18,7 +18,7 @@
 | 104 | 全國科技教育創意實作競賽 | https://technology.chc.edu.tw/ |
 | 105 | 全國中小學科學展覽會（全國科展） | https://twsf.ntsec.gov.tw |
 | 106 | 臺灣國際科學展覽會（TISF） | https://twsf.ntsec.gov.tw |
-| 107 | WMI 世界數學邀請賽（台灣選拔賽） | https://www.vipolpcs.com |
+| 107 | ~~WMI 世界數學邀請賽（台灣選拔賽）~~ *(移除於 2026-08)* | https://www.vipolpcs.com |
 | 108 | 2026 START！AI 智慧小車全國競賽（第七屆） | https://sites.google.com/a/go.pymhs.tyc.edu.tw/startlearning/ |
 | 109 | 全國創意與智慧科技競賽 2026 | https://www.cacet.org/web/2026creation/index.html |
 
